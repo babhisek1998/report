@@ -63,8 +63,8 @@ const navitems: NavItem[] = [
     displayName: 'Dashboard',
     iconName: 'dashboard', // No change, already appropriate
     route: 'dashboard',
-    show: '10',
-    type: true
+    show: 'N/A',
+    type:true
   },
   {
     parent: false,
@@ -78,24 +78,24 @@ const navitems: NavItem[] = [
     parent: true,
     displayName: 'Products',
     iconName: 'category', // Changed from 'supervised_user_circle' to 'category' for products
-    show: '11',
-    type: true,
+    show: 'N/A',
+    type:true,
     children: [
       {
         parent: false,
         displayName: 'View',
         iconName: 'visibility', // Changed from 'verified_user' to 'visibility' for viewing
         route: 'usermanagement/createbnkuser',
-        show: '7',
-        type: (sessionStorage.getItem('userType') == 'ROLE_ADMIN') ? true : false
+        show: 'N/A',
+        type:true
       },
       {
         parent: false,
         displayName: 'Add',
         iconName: 'add_circle', // Changed from 'person_pin' to 'add_circle' for adding
         route: 'usermanagement/createmerchant',
-        show: '18',
-        type: (sessionStorage.getItem('userType') == 'ROLE_ADMIN' || sessionStorage.getItem('userType') == 'ROLE_BOB_MAKER') ? true : false
+        show: 'N/A',
+        type:true
       },
       {
         parent: false,
@@ -112,16 +112,16 @@ const navitems: NavItem[] = [
     displayName: 'Lead Manager',
     iconName: 'assignment', // Changed from 'inventory' to 'assignment' for lead management
     route: 'inventorystat',
-    show: '23',
-    type: true
+    show: 'N/A',
+    type:true
   },
   {
     parent: false,
     displayName: 'Feature',
     iconName: 'star', // Changed from 'shopping_cart' to 'star' for features
     route: 'devicedelivery',
-    show: '10',
-    type: true
+    show: 'N/A',
+    type:true
   }
   // Uncomment and update icons for the following if needed:
   // {
@@ -283,19 +283,19 @@ export class AdminMainContainerComponent implements OnInit {
     this._mobileQueryListener1 = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
     this.mobileQueryTablet.addListener(this._mobileQueryListener1);
-    this.storeprivileges = (sessionStorage.getItem('storeprivileges'));
+    // this.storeprivileges = (sessionStorage.getItem('storeprivileges'));
     this.demo = navitems;
   }
   ngOnInit() {
-    if (!sessionStorage.getItem('CORE_SESSION')) {
-      this.httpService.logout();
-    } else {
-      let sessionData: any = sessionStorage.getItem('CORE_SESSION');
-      var decoded_data: any = jwtDecode(sessionData);
-      if (decoded_data.isPasswordResetRequired) {
-        this.showDialog();
-      }
-    }
+    // if (!sessionStorage.getItem('CORE_SESSION')) {
+    //   this.httpService.logout();
+    // } else {
+    //   let sessionData: any = sessionStorage.getItem('CORE_SESSION');
+    //   var decoded_data: any = jwtDecode(sessionData);
+    //   if (decoded_data.isPasswordResetRequired) {
+    //     this.showDialog();
+    //   }
+    // }
   }
 
   showDialog() {
@@ -307,12 +307,12 @@ export class AdminMainContainerComponent implements OnInit {
     );
   }
   check_feature(id: any) {
-
-    if (this.storeprivileges.includes(id)) {
-      return false;
-    } else {
-      return true
-    }
+  return true
+    // if (this.storeprivileges.includes(id)) {
+    //   return false;
+    // } else {
+    //   return true
+    // }
 
   }
 
@@ -346,15 +346,15 @@ export class AdminMainContainerComponent implements OnInit {
     this.httpService.logout();
   }
   chngpasswordlogout() {
-    let sessionData: any = sessionStorage.getItem('CORE_SESSION');
-    var decoded_data: any = jwtDecode(sessionData);
-    if (decoded_data.isPasswordResetRequired) {
-      this.httpService.logout();
-    }
-    else {
-      this.changepassword_show = false;
-      this.router.navigateByUrl("/admin/dashboard");
-    }
+    // let sessionData: any = sessionStorage.getItem('CORE_SESSION');
+    // var decoded_data: any = jwtDecode(sessionData);
+    // if (decoded_data.isPasswordResetRequired) {
+    //   this.httpService.logout();
+    // }
+    // else {
+    //   this.changepassword_show = false;
+    //   this.router.navigateByUrl("/admin/dashboard");
+    // }
   }
 
   //cahnge password
@@ -445,66 +445,66 @@ export class AdminMainContainerComponent implements OnInit {
   }
 
   sendOtp() {
-    showLoader();
-    let reqBody = {
-      newPassword: this.ch_password.get('new_password').value,
-      oldPassword: this.ch_password.get('old_password').value,
-    };
+    // showLoader();
+    // let reqBody = {
+    //   newPassword: this.ch_password.get('new_password').value,
+    //   oldPassword: this.ch_password.get('old_password').value,
+    // };
 
-    this.http.post(environment.send_otp, reqBody).subscribe({
-      next: (res: any) => {
-        hideLoader();
-        if (res.statusCode == -1) {
-          this.ch_password.reset();
-          this.toastUtility.show(res.statusDesc, 'bg-danger', 3000);
-        } else {
-          this.otp_sent = false;
-          this.toastUtility.show(res.statusDesc, 'bg-success', 3000);
-          this.startTimer();
-        }
-      },
-      error: (err: any) => {
-        hideLoader();
-        let e = err.error.statusDesc ? err.error.statusDesc : err.error.message;
-        this.toastUtility.show(e, 'bg-danger', 3000);
-        this.ch_password.reset();
-      },
-    });
+    // this.http.post(environment.send_otp, reqBody).subscribe({
+    //   next: (res: any) => {
+    //     hideLoader();
+    //     if (res.statusCode == -1) {
+    //       this.ch_password.reset();
+    //       this.toastUtility.show(res.statusDesc, 'bg-danger', 3000);
+    //     } else {
+    //       this.otp_sent = false;
+    //       this.toastUtility.show(res.statusDesc, 'bg-success', 3000);
+    //       this.startTimer();
+    //     }
+    //   },
+    //   error: (err: any) => {
+    //     hideLoader();
+    //     let e = err.error.statusDesc ? err.error.statusDesc : err.error.message;
+    //     this.toastUtility.show(e, 'bg-danger', 3000);
+    //     this.ch_password.reset();
+    //   },
+    // });
   }
 
   validateOtp() {
-    showLoader();
-    let reqBody = {
-      newPassword: this.ch_password.get('new_password').value,
-      oldPassword: this.ch_password.get('old_password').value,
-      otp: this.otpValue,
-    };
+    // showLoader();
+    // let reqBody = {
+    //   newPassword: this.ch_password.get('new_password').value,
+    //   oldPassword: this.ch_password.get('old_password').value,
+    //   otp: this.otpValue,
+    // };
 
-    this.http.post(environment.change_password, reqBody).subscribe({
-      next: (res: any) => {
-        hideLoader();
-        if (res.statusCode == -1) {
-          this.toastUtility.show(res.statusDesc, 'bg-danger', 3000);
-          this.ngOtpInput.setValue('');
-        } else {
-          this.toastUtility.show(res.statusDesc, 'bg-success', 3000);
+    // this.http.post(environment.change_password, reqBody).subscribe({
+    //   next: (res: any) => {
+    //     hideLoader();
+    //     if (res.statusCode == -1) {
+    //       this.toastUtility.show(res.statusDesc, 'bg-danger', 3000);
+    //       this.ngOtpInput.setValue('');
+    //     } else {
+    //       this.toastUtility.show(res.statusDesc, 'bg-success', 3000);
 
-          setTimeout(() => {
-            var domain = 'http://' + sessionStorage.getItem('logouturl');
-            localStorage.clear();
-            sessionStorage.clear();
-            window.location.href = `${domain}`;
-            this.router.navigate['/'];
-          }, 1500);
-        }
-      },
-      error: (err: any) => {
-        hideLoader();
-        let e = err.error.statusDesc ? err.error.statusDesc : err.error.message;
-        this.toastUtility.show(e, 'bg-danger', 3000);
-        this.ngOtpInput.setValue('');
-      },
-    });
+    //       setTimeout(() => {
+    //         var domain = 'http://' + sessionStorage.getItem('logouturl');
+    //         localStorage.clear();
+    //         sessionStorage.clear();
+    //         window.location.href = `${domain}`;
+    //         this.router.navigate['/'];
+    //       }, 1500);
+    //     }
+    //   },
+    //   error: (err: any) => {
+    //     hideLoader();
+    //     let e = err.error.statusDesc ? err.error.statusDesc : err.error.message;
+    //     this.toastUtility.show(e, 'bg-danger', 3000);
+    //     this.ngOtpInput.setValue('');
+    //   },
+    // });
   }
 
 
@@ -513,6 +513,6 @@ export class AdminMainContainerComponent implements OnInit {
   }
 
   goToTms(){
-    window.open('https://isutms.web.app/');
+    // window.open('https://isutms.web.app/');
   }
 }

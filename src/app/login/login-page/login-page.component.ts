@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { PhoneVerificationComponent } from '../phone-verification/phone-verification.component';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -7,8 +6,6 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
-import { VerificationCompleteComponent } from '../verification-complete/verification-complete.component';
 import { HttpServiceService } from '../../http-service.service';
 import { showLoader, hideLoader, showDynamicModal, hideDynamicModal, ToastUtility } from '../../common-utility';
 import { NumberOnlyDirective } from '../../directives/onlyNumber.directive';
@@ -25,7 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [PhoneVerificationComponent, SpinnerComponent,
+  imports: [ SpinnerComponent,
     SpinnerComponent,
     ReactiveFormsModule,
     MatCheckboxModule,
@@ -36,11 +33,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    ForgotPasswordComponent,
     MatIconModule,
     NumberOnlyDirective,
-    NoWhitespaceDirective,
-    VerificationCompleteComponent],
+    NoWhitespaceDirective],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
 })
@@ -112,130 +107,131 @@ export class LoginPageComponent {
     this.changePage('phoneVerification');
   }
   async loginAPI() {
-    showLoader();
-    await this.watchLocation();
-    let params = new URLSearchParams();
-    params.set('grant_type', 'password');
-    console.log(this.cookies_username);
+    this.router.navigate(['/admin/dashboard']);
+    // showLoader();
+    // await this.watchLocation();
+    // let params = new URLSearchParams();
+    // params.set('grant_type', 'password');
+    // console.log(this.cookies_username);
 
-    if (this.cookies_username) {
-      params.set('username', this.cookies_username);
-    }
-    else {
-      params.set('username', this.loginForm.get('username')?.value);
-    }
-    params.set('password', this.loginForm.get('password')?.value);
-    this.httpService.post(environment.login, params.toString()).pipe(finalize(() => { hideLoader(); })).subscribe({
-      next: (res: any) => {
-        hideLoader();
-        if (res) {
-          let token: any = jwtDecode(res.access_token);
-          let logouturl = window.location.host;
-          let access_token = res.access_token;
-          let refresh_token = res.refresh_token;
-          let exp = res.exp;
-
-
-          let adminname = res.adminName;
-          sessionStorage.setItem('refresh_token', refresh_token);
-          sessionStorage.setItem('access_token', access_token);
-          sessionStorage.setItem('exp', exp);
-          localStorage.setItem('admin_name', adminname);
-          this.cookie.set('admin_name', adminname);
-          sessionStorage.setItem('loginInfo', JSON.stringify(res));
-          sessionStorage.setItem('CORE_SESSION', res.access_token);
-          sessionStorage.setItem('logouturl', logouturl);
-          let role = token.authorities[0];
-          sessionStorage.setItem('userType', role);
-          this.cookie.set('user_name', this.loginForm.get('username')?.value);
-          if (this.rememberMe) {
-            this.cookies_username ? this.cookie.set('username', this.cookies_username) : this.cookie.set('username', this.loginForm.value.username);
-          } else {
-            this.cookie.delete('username');
-          }
-
-          this.dashBoard(role);
+    // if (this.cookies_username) {
+    //   params.set('username', this.cookies_username);
+    // }
+    // else {
+    //   params.set('username', this.loginForm.get('username')?.value);
+    // }
+    // params.set('password', this.loginForm.get('password')?.value);
+    // this.httpService.post(, params.toString()).pipe(finalize(() => { hideLoader(); })).subscribe({
+    //   next: (res: any) => {
+    //     hideLoader();
+    //     if (res) {
+    //       let token: any = jwtDecode(res.access_token);
+    //       let logouturl = window.location.host;
+    //       let access_token = res.access_token;
+    //       let refresh_token = res.refresh_token;
+    //       let exp = res.exp;
 
 
-        }
+    //       let adminname = res.adminName;
+    //       sessionStorage.setItem('refresh_token', refresh_token);
+    //       sessionStorage.setItem('access_token', access_token);
+    //       sessionStorage.setItem('exp', exp);
+    //       localStorage.setItem('admin_name', adminname);
+    //       this.cookie.set('admin_name', adminname);
+    //       sessionStorage.setItem('loginInfo', JSON.stringify(res));
+    //       sessionStorage.setItem('CORE_SESSION', res.access_token);
+    //       sessionStorage.setItem('logouturl', logouturl);
+    //       let role = token.authorities[0];
+    //       sessionStorage.setItem('userType', role);
+    //       this.cookie.set('user_name', this.loginForm.get('username')?.value);
+    //       if (this.rememberMe) {
+    //         this.cookies_username ? this.cookie.set('username', this.cookies_username) : this.cookie.set('username', this.loginForm.value.username);
+    //       } else {
+    //         this.cookie.delete('username');
+    //       }
 
-      },
-      error: (err: any) => {
-        hideLoader();
-        const errMsg =
-          err.error.error_description ? err.error.error_description : 'Server Error, Please, try again.';
-        this.toastUtility.show('Login Failed: ' + errMsg, 'bg-danger', 2000);
-      }
-    })
+    //       this.dashBoard(role);
+
+
+    //     }
+
+    //   },
+    //   error: (err: any) => {
+    //     hideLoader();
+    //     const errMsg =
+    //       err.error.error_description ? err.error.error_description : 'Server Error, Please, try again.';
+    //     this.toastUtility.show('Login Failed: ' + errMsg, 'bg-danger', 2000);
+    //   }
+    // })
 
   }
 
   async dashBoard(role: any) {
-    showLoader();
-    this.httpService.get(environment.dashboardapi).pipe(finalize(() => { hideLoader(); })).subscribe({
-      next: (res: any) => {
-        hideLoader();
-        this.user_name = res.userInfo.userName;
-        this.admin_name = res.userInfo.adminName;
-        this.mobile_num = res.userInfo.userProfile.mobileNumber;
-        this.email_id = res.userInfo.userProfile.email;
-        this.user_type = res.userInfo.userType;
+    // showLoader();
+    // this.httpService.get(environment.dashboardapi).pipe(finalize(() => { hideLoader(); })).subscribe({
+    //   next: (res: any) => {
+    //     hideLoader();
+    //     this.user_name = res.userInfo.userName;
+    //     this.admin_name = res.userInfo.adminName;
+    //     this.mobile_num = res.userInfo.userProfile.mobileNumber;
+    //     this.email_id = res.userInfo.userProfile.email;
+    //     this.user_type = res.userInfo.userType;
 
-        if (
-          this.user_type == 'ROLE_ADMIN') {
-          sessionStorage.setItem('UserData', JSON.stringify(res));
-        } else if (this.user_type == 'ROLE_RETAILER') {
-          localStorage.setItem('shop_name', res.userInfo.userProfile.shopName);
-          sessionStorage.setItem('userInfo', JSON.stringify(res.userInfo));
-        }
-        sessionStorage.setItem(
-          'privileges',
-          JSON.stringify(res.userInfo.privileges)
-        );
-        localStorage.setItem('user_type', res.userInfo.userType);
-        localStorage.setItem('user_name', res.userInfo.userName);
-        localStorage.setItem('brand_name', res.userInfo.userBrand);
-        sessionStorage.setItem('dashboardData', JSON.stringify(res.userInfo));
-        this.navigateToUser(role);
-      },
-      error: (err: any) => {
-        hideLoader();
-        this.toastUtility.show(
-          'Something went wrong. Try login again.',
-          'bg-danger',
-          2000
-        );
-      }
-    })
+    //     if (
+    //       this.user_type == 'ROLE_ADMIN') {
+    //       sessionStorage.setItem('UserData', JSON.stringify(res));
+    //     } else if (this.user_type == 'ROLE_RETAILER') {
+    //       localStorage.setItem('shop_name', res.userInfo.userProfile.shopName);
+    //       sessionStorage.setItem('userInfo', JSON.stringify(res.userInfo));
+    //     }
+    //     sessionStorage.setItem(
+    //       'privileges',
+    //       JSON.stringify(res.userInfo.privileges)
+    //     );
+    //     localStorage.setItem('user_type', res.userInfo.userType);
+    //     localStorage.setItem('user_name', res.userInfo.userName);
+    //     localStorage.setItem('brand_name', res.userInfo.userBrand);
+    //     sessionStorage.setItem('dashboardData', JSON.stringify(res.userInfo));
+    //     this.navigateToUser(role);
+    //   },
+    //   error: (err: any) => {
+    //     hideLoader();
+    //     this.toastUtility.show(
+    //       'Something went wrong. Try login again.',
+    //       'bg-danger',
+    //       2000
+    //     );
+    //   }
+    // })
   }
 
   navigateToUser(role: any) {
-    console.log(role);
+//     console.log(role);
 
-    hideLoader();
-    this.toastUtility.show('Login successful.', 'bg-success', 5000);
-    let storeprivileges = [];
-    switch (role) {
-      case 'ROLE_ADMIN':
-        storeprivileges = [];
-        sessionStorage.setItem('storeprivileges',JSON.stringify( storeprivileges))
-        this.router.navigate(['/admin/dashboard']);
-        break
-      case 'ROLE_BOB_CHECKER':
-        storeprivileges = ['7','18'];
-        sessionStorage.setItem('storeprivileges',JSON.stringify( storeprivileges))
-        this.router.navigate(['/admin/dashboard']);
-        break
-      case 'ROLE_BOB_MAKER':
-         storeprivileges = ['7'];
-        sessionStorage.setItem('storeprivileges',JSON.stringify( storeprivileges))
-        this.router.navigate(['/admin/dashboard']);
+//     hideLoader();
+//     this.toastUtility.show('Login successful.', 'bg-success', 5000);
+//     let storeprivileges = [];
+//     switch (role) {
+//       case 'ROLE_ADMIN':
+//         storeprivileges = [];
+//         sessionStorage.setItem('storeprivileges',JSON.stringify( storeprivileges))
+//         this.router.navigate(['/admin/dashboard']);
+//         break
+//       case 'ROLE_BOB_CHECKER':
+//         storeprivileges = ['7','18'];
+//         sessionStorage.setItem('storeprivileges',JSON.stringify( storeprivileges))
+//         this.router.navigate(['/admin/dashboard']);
+//         break
+//       case 'ROLE_BOB_MAKER':
+//          storeprivileges = ['7'];
+//         sessionStorage.setItem('storeprivileges',JSON.stringify( storeprivileges))
+//         this.router.navigate(['/admin/dashboard']);
 
-    break;
-  case 'ROLE_RETAILER':
-    this.router.navigate(['merchant/dashboard']);
-    break;
-}
+//     break;
+//   case 'ROLE_RETAILER':
+//     this.router.navigate(['merchant/dashboard']);
+//     break;
+// }
   }
 
 

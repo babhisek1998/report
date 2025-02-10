@@ -9,6 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './admin-dashboard.component.scss'
 })
 export class AdminDashboardComponent {
-  dashboardimg: string = '../assets/images/admin/11641630_4782104 1.png';
-  userType: string = JSON.parse(sessionStorage.getItem('dashboardData')).userType;
+  // dashboardimg: string = '../assets/images/admin/11641630_4782104 1.png';
+  // userType: string = JSON.parse(sessionStorage.getItem('dashboardData')).userType;
 }
