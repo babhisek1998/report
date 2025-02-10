@@ -1,0 +1,40 @@
+*{
+    font-size: 14px;
+}
+.mathfont{
+    font-family: montserrat, arial, verdana;
+    font-size: 14px;
+}
+.card-upload{
+    height: 99px;
+    border: 2px dotted rgba(178, 187, 198, 1);
+}
+
+.mathopacity{
+    opacity: 0.5;
+}
+
+.btn-custom3 {
+    width: 100px;
+    height: 42px;
+    color: white;
+    background: #ff6b11;
+    border-radius: 8px;
+}
+.btn-cancel {
+    width: 100px;
+    height: 42px;
+    border-radius: 8px;
+    border: 1px solid rgba(28, 28, 28, 0.3);
+}
+
+::placeholder {
+    color: gray;
+}
+
+.custom-placeholder {
+    color: gray;
+}
+textarea{
+    resize: none;
+}

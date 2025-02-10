@@ -1,0 +1,124 @@
+.success-img{
+    content: url("../../../assets/images/loginpage/forgotpasswordbackground.png");
+    height: 600px;
+  }
+  
+  .Start_header {
+    font-family: "Helvetica";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 60px;
+    text-align: center;
+  
+    color: #555555;
+  }
+  .text-custom {
+    font-family: "Helvetica Neue";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: 0.0016em;
+  
+    color: #5d5d5d;
+  }
+ 
+  .btn-custom {
+    background-color: forestgreen;
+    height: 53px;
+    border-radius: 10px;
+  }
+  .container1 {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2.7% 6% 0 6%;
+    overflow: hidden !important;
+  }
+  
+ 
+  
+  .form_signin {
+    padding: 30% 12% 12% 12%;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+  }
+  
+  .login-link {
+    color: orange;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .text-secondary{
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      
+  }
+  .login-link:hover {
+    color: darkorange;
+  }
+  
+  .input_form {
+    border: 1px solid forestgreen;
+    width: 508px;
+    height: 57.27px;
+    background: #ffffff;
+    border: 1.36364px solid forestgreen;
+    box-shadow: 0px 1.36364px 2.72727px rgba(16, 24, 40, 0.05);
+    border-radius: 10.9091px;
+  }
+ 
+  
+  @media screen and (max-width: 750px) {
+    .Forgetbackgroundimage {
+      content: none;
+      height: 0px;
+    }
+  
+    .form_signin {
+      padding: 10%;
+    }
+  }
+  
+  //animation images
+  
+  #slide {
+    position: absolute;
+    left: -1200px;
+    -webkit-animation: slide 0.1s forwards;
+    -webkit-animation-delay: 0.1s;
+    animation: slide 0.1s forwards;
+    animation-delay: 1s;
+  }
+  
+  @-webkit-keyframes slide {
+    100% {
+      left: 0;
+    }
+  }
+  
+  @keyframes slide {
+    100% {
+      left: 0;
+    }
+  }
+  
+  #fade {
+    animation: fade-in 2s forwards;
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  

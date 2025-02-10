@@ -1,0 +1,74 @@
+.btn-custom3 {
+  width: 150px;
+  height: 42px;
+  color: white;
+  background: #ff6b11;
+  border-radius: 8px;
+}
+
+.btn-cancel {
+  width: 150px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 28, 28, 0.3);
+}
+
+.createTag {
+  gap: 8px;
+  font-weight: 500;
+  font-family: montserrat, arial, verdana;
+  font-size: 14px;
+  line-height: 19.6px;
+}
+
+::placeholder {
+  color: gray;
+}
+
+.custom-placeholder {
+  color: gray;
+}
+
+
+.poscustom {
+  position: absolute;
+}
+
+.customTextColor1 {
+  font-size: 1rem;
+  color: #3D3D3D;
+  font-family: montserrat, arial, verdana;
+}
+
+.customTextColor {
+  color: #383737;
+  font-weight: 600;
+  font-family: montserrat, arial, verdana;
+}
+
+
+.input-box input,select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  box-shadow: none !important;
+}
+
+ .input-box input:focus,
+.input-box input:valid {
+  border-color:rgba(250, 141, 39, 0.877);
+}
+
+.btn_border {
+  border-color: red !important;
+}
+
+.btn_border2 {
+  border-color:rgba(250, 141, 39, 0.877) !important;
+}

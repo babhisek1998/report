@@ -1,0 +1,154 @@
+<div class="">
+  <div class="orange-bg">
+
+    <img [src]="topnavImg" alt="Logo" class="logo">
+    <button mat-icon-button *ngIf="!mobileQueryTablet.matches"
+      [ngClass]="toggle == true ? 'buttonClass MenuBtn' : 'buttonClass MenuHoverBtn'"
+      (click)="btnClick();!mobileQueryTablet.matches?onhover = !onhover: '';!mobileQuery.matches?(!onhover ? increase() : decrease()):  isMenuOpen = !isMenuOpen">
+      <mat-icon class="menuicon1">{{ mobileQuery.matches ? isMenuOpen ? 'menu_open' : 'menu' :onhover ?
+        'menu_open'
+        : 'menu' }}</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="mobileQueryTablet.matches" [ngClass]="toggle == true ? 'buttonClass' : 'buttonClass'"
+      (click)="btnClick();!mobileQueryTablet.matches?onhover = !onhover: '';!mobileQuery.matches?(!onhover ? increase() : decrease()):  isMenuOpen = !isMenuOpen">
+      <mat-icon class="menuicon1">{{ mobileQuery.matches ? isMenuOpen ? 'menu_open' : 'menu' :onhover ?
+        'menu_open'
+        : 'menu' }}</mat-icon>
+    </button>
+    <div class="cylinder">
+      <!-- <button class="buttonClass" mat-icon-button (click)="notification.toggle($event)">
+        <mat-icon class="menuicon" [matBadge]="totalnotifycount" matBadgeColor="warn">notifications_active</mat-icon>
+      </button> -->
+      <div class="" style="display: inline-flex;">
+        <div class="input-group">
+          <!-- Dropdown (Prefix) -->
+          <select class="form-select" [(ngModel)]="selectedCategory">
+            <option value="" selected disabled>Select</option>
+            <option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </option>
+          </select>
+      
+          <!-- Search Input with Autocomplete -->
+          <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search..." (input)="filterFoods()" list="foodList">
+          
+          <!-- Datalist for Autocomplete -->
+          <datalist id="foodList">
+            <option *ngFor="let food of filteredFoods" [value]="food.viewValue">
+              {{ food.viewValue }}
+            </option>
+          </datalist>
+        </div>
+      </div>
+            
+      <button mat-icon-button class="buttonClass mr-1" [matMenuTriggerFor]="menu">
+        <mat-icon class="menuicon mx-1">account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item class="" (click)="goToProfile()">
+          <mat-icon class="menuicon mx-1">account_circle</mat-icon>Profile
+        </button>
+        <button mat-menu-item class="" (click)="changepassword_show=true">
+          <mat-icon class="menuicon mx-1">visibility</mat-icon>Theme
+        </button>
+        <button mat-menu-item (click)="visible=true">
+          <mat-icon class="menuicon mx-1">logout</mat-icon>Logout
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  <mat-sidenav-container opened class="vertical-menu">
+    <mat-sidenav #sidenav mode="side" [attr.role]="'navigation'" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [ngStyle]="{'width.em': sidenavWidth, 'transition-duration.s': 0.3, 'transition-property': 'width','transition-timing-function':'ease-in' }"
+      [opened]="mobileQueryTablet.matches?isMenuOpen:''" (mouseenter)="onhover ? increase():''"
+      (mouseleave)="onhover ? decrease() : ''">
+      <span *ngFor="let item of demo;let i = index" class="mt-4">
+          <span *ngIf="!item.tokenAuth">
+          <mat-accordion class="mat-accordian shadow-none my-1">
+            <mat-expansion-panel class="mat-expansion-panel mat-elevation-z0" [expanded]="step === i"
+              (opened)="setStep(i)" hideToggle="true">
+              <mat-expansion-panel-header [ngClass]="parentRef.isActive ? 'active' : ''"
+                class="mat-expansion-panel-header" [routerLink]="item.route" [routerLinkActive]="'active'"
+                #parentRef="routerLinkActive"
+                (click)="rotateIcon(i);mobileQueryTablet.matches ? (item.parent ? '' : isMenuOpen = !isMenuOpen) : '';"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <mat-panel-title class="d-flex justify-content-between" *ngIf="check_feature(item.show)">
+                  <div mat-flat-button fxLayout="row" fxLayoutAlign="space-between center"
+                    class="d-flex align-items-center sidenav-btn">
+                    <mat-icon class="mx-1" [ngClass]="parentRef.isActive ? 'active1' : ''">{{item.iconName}}</mat-icon>
+                    <span class="mx-2 text-nowrap" [ngClass]="parentRef.isActive ? 'active1' : ''">{{item.displayName
+                      }}</span>
+                  </div>
+                  <mat-icon *ngIf="item.parent" [@random]="test === i ? state : 'default'"
+                    [ngClass]="parentRef.isActive ? 'active' : ''">expand_more</mat-icon>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <span class="marginForChildrenDiv" *ngIf="item.children && item.children.length > 0 && sidenavWidth > 4">
+                <div [routerLink]="[child.route]" [routerLinkActive]="'active'" #childRef="routerLinkActive"
+                  class="childItems d-flex align-items-center justify-content-between" *ngFor="let child of item.children"
+                  (click)="mobileQueryTablet.matches ? isMenuOpen = !isMenuOpen : ''"
+                  [routerLinkActiveOptions]="{ exact: true }" [ngClass]="childRef.isActive ? 'active' : ''">
+                  <span class="text-nowrap disname" *ngIf="check_feature(child.show)">
+                    <mat-icon class="mx-1 childIcon">{{child.iconName}}</mat-icon>
+                    <p class="m-0">
+                      {{child.displayName.length > 16 ? (child.displayName | slice : 0 :
+                      15)+ '...' : child.displayName}}</p>
+                  </span>
+                </div>
+              </span>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </span>
+      </span>
+      <span *ngFor="let item of demo;let i = index" class="mt-4">
+        <span *ngIf="item.tokenAuth">
+          <mat-accordion class="mat-accordian shadow-none my-1">
+            <mat-expansion-panel class="mat-expansion-panel mat-elevation-z0" [expanded]="step === i"
+              (opened)="setStep(i)" hideToggle="true">
+              <mat-expansion-panel-header [ngClass]="parentRef.isActive ? 'active' : ''"
+                class="mat-expansion-panel-header" (click)="goToTms()"  [routerLinkActive]="'active'"
+                #parentRef="routerLinkActive"
+                (click)="rotateIcon(i);mobileQueryTablet.matches ? (item.parent ? '' : isMenuOpen = !isMenuOpen) : '';"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <mat-panel-title class="d-flex justify-content-between" *ngIf="check_feature(item.show)">
+                  <div mat-flat-button fxLayout="row" fxLayoutAlign="space-between center"
+                    class="d-flex align-items-center sidenav-btn" >
+                    <mat-icon class="mx-1" [ngClass]="parentRef.isActive ? 'active1' : ''">{{item.iconName}}</mat-icon>
+                    <span class="mx-2 text-nowrap" [ngClass]="parentRef.isActive ? 'active1' : ''">{{item.displayName
+                      }}</span>
+                  </div>
+                  <mat-icon *ngIf="item.parent" [@random]="test === i ? state : 'default'"
+                    [ngClass]="parentRef.isActive ? 'active' : ''">expand_more</mat-icon>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </span>
+      </span>
+    
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill class="p-4"
+      [ngStyle]="{'margin-left.em' : sidenavWidth, 'transition-duration.s': 0.3, 'transition-property': 'margin-left','transition-timing-function':'ease-in'}">
+      <router-outlet>
+        <app-spinner></app-spinner>
+      </router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
+
+<p-dialog header="Are you sure to Logout ?" [(visible)]="visible" [modal]="true"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [dismissableMask]="true" [style]="{ width: '25vw' }"
+  [draggable]="false" [resizable]="false" [closeOnEscape]="true" [closable]="false" [blockScroll]="true"
+  [transitionOptions]="'1500ms cubic-bezier(0.3, -0.55, 0.27, 1.55)'">
+  <div class="card primetab flex justify-content-center">
+    <div class=" text-center">
+      <button class="btn btn-primary mt-2 mb-4 mr-2 btncolor" (click)="logout()">
+        Yes&nbsp;</button>
+      <button class="btn btn-danger mt-2 mb-4" (click)="visible=false" data-dismiss="modal" aria-label="Close">
+        No&nbsp; </button>
+    </div>
+  </div>
+</p-dialog>
+<p-toast></p-toast>

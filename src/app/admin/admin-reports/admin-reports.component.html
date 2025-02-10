@@ -1,0 +1,230 @@
+<div class="container1 mt-4">
+  <div class="row">
+      <div class="col-md-4">
+          <div class="card" style="height: 9rem;width: 100%;">
+              <div class="card-body">
+                  <div class="d-flex customFlessClass">
+                      <div class="customWidth">
+                          <span class="customText">Total Number Of Transaction</span>
+                      </div>
+                      <div class="">
+                          <mat-icon class="menuicon">devices</mat-icon>
+                      </div>
+                  </div>
+                  <div class="mt-2">
+                      <div class="">
+                          <span><strong class="mr-4">50,806</strong><mat-icon
+                                  class="menuicon material-icons mx-2">north_west</mat-icon><span>+9%</span>
+                          </span>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="card" style="height: 9rem;">
+              <div class="card-body">
+                  <div class="d-flex customFlessClass">
+                      <div class="customWidth">
+                          <span class="customText">Total Notifications Played</span>
+                      </div>
+                      <div class="">
+                          <mat-icon class="menuicon">devices</mat-icon>
+                      </div>
+                  </div>
+                  <div class="mt-2">
+                      <div class="">
+                          <span><strong class="mr-4">50,796</strong><mat-icon
+                                  class="menuicon material-icons mx-2">north_west</mat-icon><span>+11%</span>
+                          </span>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="card" style="height: 9rem;">
+              <div class="card-body">
+                  <div class="d-flex customFlessClass">
+                      <div class="customWidth">
+                          <span class="customText">Total Notifications Not Played</span>
+                      </div>
+                      <div class="">
+                          <mat-icon class="menuicon">devices</mat-icon>
+                      </div>
+                  </div>
+                  <div class="mt-2">
+                      <div class="">
+                          <span><strong class="mr-4">10</strong><mat-icon
+                                  class="menuicon material-icons mx-2">south_east</mat-icon><span>+9%</span>
+                          </span>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<mat-tab-group (selectedTabChange)="changeTabColor($event)">
+    <!-- First Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img *ngIf="selectedTab === 0" [src]="TransAndNotOrange" alt="Active Icon" />
+        <img *ngIf="selectedTab !== 0" [src]="TransAndNotGrey" alt="Inactive Icon" />
+  
+        <p class="mat-label" [ngClass]="{'active-label': selectedTab === 0, 'inactive-label': selectedTab !== 0}">
+          Transaction & Notification Report
+        </p>
+      </ng-template>
+  
+      <form [formGroup]="transactionForm">
+        <div class="form-row align-items-center">
+          <div class="col-auto">
+            <p>Start Date</p>
+            <mat-form-field appearance="outline">
+              <mat-label>MM/DD/YYYY</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="startDate" />
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-auto">
+            <p>End Date</p>
+            <mat-form-field appearance="outline">
+              <mat-label>MM/DD/YYYY</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="endDate" />
+              <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-auto">
+            <button type="submit" class="btn btn-custom mb-2" (click)="onSubmit()">Submit</button>
+          </div>
+        </div>
+      </form>
+  
+      <div *ngIf="showTable">
+        <app-data-table [columnss]="columns" [component]="component" [tableData]="dataForTable"></app-data-table>
+      </div>
+    </mat-tab>
+  
+    <!-- Second Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <img *ngIf="selectedTab === 1" [src]="SystemReportOrange" alt="Active Icon" />
+        <img *ngIf="selectedTab !== 1" [src]="SystemReortNotGrey" alt="Inactive Icon" />
+  
+        <p class="mat-label" [ngClass]="{'active-label': selectedTab === 1, 'inactive-label': selectedTab !== 1}">
+          System Report
+        </p>
+      </ng-template>
+  
+  
+
+      <div class="form-check form-check-inline mx-4">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="date"
+          (click)="showTable_on_radio('device')" checked/>
+        <label class="form-check-label" for="inlineRadio1">Device</label>
+      </div>
+  
+  
+  <div class="form-check form-check-inline mx-4">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="serialNumber"
+      (click)="showTable_on_radio('mqtt')" />
+    <label class="form-check-label" for="inlineRadio2">MQTT</label>
+  </div>
+
+
+<form [formGroup]="systemReportForm" *ngIf="showDeviceReport">
+  <div class="container">
+    <div class="sub-container">
+      <select formControlName="deviceSlNo" class="form-select" aria-label="Select Device Sl No">
+        <option value="" disabled>Select Device Sl No.</option>
+        <option value="153221">153221</option>
+        <option value="153222">153222</option>
+        <option value="153225">153225</option>
+      </select>
+    </div>
+
+    <div class="sub-container">
+      <select formControlName="month" class="form-select" aria-label="Select Month">
+        <option value="" disabled>Select Month</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-custom1 mb-2" (click)="onSubmit_system_report()">Submit</button>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="MQTT">
+  <form [formGroup]="mqttForm" class="m-2">
+    <div class="container">
+      <div class="sub-container">
+        <select formControlName="month" class="form-select" aria-label="Select Month">
+          <option value="" disabled>Select Month</option>
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+        </select>
+      </div>
+  
+      <div class="col-auto">
+        <button type="submit" class="btn btn-custom1 mb-2" (click)="MQTTshow = true">Submit</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row rowdiv m-3" *ngIf="MQTTshow">
+    <div class="col-md-6 d-flex justify-content-between border-bottom p-3">
+        <h5 class="mathFont">Month</h5>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center border-bottom p-3">
+      <h5 class="mathFont">Uptime for MQTT</h5>
+    </div>
+    <div class="col-md-6 p d-flex justify-content-between p-3">
+        <span>October 2020</span>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center p-3">
+      <span>100%</span>
+    </div>
+  </div>
+
+  <div class="row rowdiv m-3" *ngIf="MQTTshow">
+    <div class="col-md-4 d-flex justify-content-between border-bottom p-3">
+        <h6 class="mathFont">Month</h6>
+    </div>
+    <div class="col-md-4 d-flex justify-content-center border-bottom p-3">
+      <h6 class="mathFont">Unscheduled Downtime (In Min)</h6>
+    </div>
+    <div class="col-md-4 d-flex justify-content-center border-bottom p-3">
+      <h6 class="mathFont">No of incident</h6>
+    </div>
+    <div class="col-md-4 p d-flex justify-content-between p-3">
+        <span>October 2020</span>
+    </div>
+    <div class="col-md-4 d-flex justify-content-center p-3">
+      <span>0</span>
+    </div>
+    <div class="col-md-4 d-flex justify-content-center p-3">
+      <span>0</span>
+    </div>
+  </div>
+</div>
+  
+      <div *ngIf="showTable1">
+        <app-data-table [columnss]="columns" [component]="component" [tableData]="dataForTable1"></app-data-table>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  

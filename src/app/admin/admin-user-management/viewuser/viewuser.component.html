@@ -1,0 +1,78 @@
+<div class="main_container">
+  <div class="header">
+    <h4 class="customTextColor">View user</h4>
+  </div>
+  <form [formGroup]="viewUserForm">
+    <div class="form-row align-items-center row">
+      <div class="col-auto col-md-3 mx-2">
+        <p class="mathfont">Start Date</p>
+        <mat-form-field appearance="outline">
+          <mat-label>MM/DD/YYYY</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            onkeydown="return false"
+            [max]="today"
+            formControlName="startDate"
+            (dateChange)="saverange($event)"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-auto col-md-3 mx-2">
+        <p class="mathfont">End Date</p>
+        <mat-form-field appearance="outline">
+          <mat-label>MM/DD/YYYY</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            [max]="somedate2"
+            [min]="somedate1"
+            formControlName="EndDate"
+            onkeydown="return false"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-auto col-md-3 mx-2">
+        <p class="mathfont">Choose Status</p>
+        <mat-form-field appearance="outline">
+          <mat-label>Select option</mat-label>
+          <mat-select formControlName="option" panelClass="matfont">
+            <mat-option value="ALL">ALL</mat-option>
+            <mat-option value="APPROVED">APPROVED</mat-option>
+            <mat-option value="REJECTED">REJECTED</mat-option>
+            <mat-option value="PENDING">PENDING</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-auto col-md-2">
+        <button
+          type="button"
+          class="btn btn-custom mb-2 mathfont"
+          (click)="showTable()"
+          [disabled]="viewUserForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+
+  @if(showTableData && transformedDataForTable.length > 0){
+  <ng-container>
+    <app-viewuser-dtable
+      [tableData]="transformedDataForTable"
+      [columnss]="displayedColumns"
+    ></app-viewuser-dtable>
+  </ng-container>
+  }
+</div>

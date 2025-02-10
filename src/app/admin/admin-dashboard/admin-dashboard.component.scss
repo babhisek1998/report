@@ -1,0 +1,54 @@
+.dashboardclass{
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.customfont{
+    font-family: montserrat, arial, verdana;
+}
+
+
+.customFlessClass {
+    justify-content: space-between;
+  }
+  
+  .customText {
+    font-family: montserrat, arial, verdana;
+    font-weight: 500;
+  }
+  .customText1 {
+    font-family: montserrat, arial, verdana;
+    font-weight: 500;
+    font-size: x-large;
+  }
+  
+  .menuicon {
+    cursor: pointer;
+    color: forestgreen !important;
+  
+  }
+  
+  .material-icons {
+    display: inline-flex;
+    vertical-align: text-bottom;
+  }
+  
+  .customWidth {
+    width: 9rem;
+  }
+  
+  .customButton {
+    background-color: forestgreen;
+    color: white;
+  }
+
+
+
+.customTextColor {
+  color: #383737;
+  font-weight: 600;
+  font-family: montserrat, arial, verdana;
+}

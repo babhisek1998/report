@@ -1,0 +1,54 @@
+.header_font {
+    font-family: montserrat, arial, verdana;
+    font-size: 2rem;
+}
+
+.mathfont{
+    font-family: montserrat, arial, verdana;
+}
+
+.btn-custom {
+    width: 120px;
+    height: 54px;
+    color: white;
+    background: #ff6b11;
+    border-radius: 8px;
+    margin-top: 21px;
+  }
+
+  /* Animated Input Field */
+.animated-input {
+    width: 100%;
+    /* Full width within column */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #6D6D6D;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .animated-input:hover,
+  .animated-input:focus {
+    box-shadow: 0 4px 10px rgba(250, 141, 39, 0.877),
+      0 8px 15px rgba(255, 136, 0, 0.5);
+    transform: translateY(-3px);
+  }
+  
+  .poscustom {
+    position: absolute;
+  }
+  
+  .customTextColor1 {
+    font-size: 1rem;
+    color: #3D3D3D;
+    font-family: montserrat, arial, verdana;
+  }
+  
+  .customTextColor {
+    color: #383737;
+    font-weight: 600;
+    font-family: montserrat, arial, verdana;
+  }

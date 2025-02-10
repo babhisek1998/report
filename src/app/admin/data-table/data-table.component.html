@@ -1,0 +1,121 @@
+<div class="search_download_div">
+  
+  <div class="input-group mb-3" >
+      <mat-icon class="icon">search</mat-icon>
+    <input
+      matInput
+      type="text"
+      placeholder="Search"
+      #input
+      (keyup)="applyFilter($event)"
+      placeholder="Search"
+      aria-label="Search"
+      aria-describedby="basic-addon1"
+      class="input_class"
+    />
+  </div>
+  
+
+  <div>
+    <button class="btn-custom">
+      <svg
+        width="14"
+        height="17"
+        viewBox="0 0 14 17"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.59 6H10V1C10 0.45 9.55 0 9 0H5C4.45 0 4 0.45 4 1V6H2.41C1.52 6 1.07 7.08 1.7 7.71L6.29 12.3C6.68 12.69 7.31 12.69 7.7 12.3L12.29 7.71C12.92 7.08 12.48 6 11.59 6ZM0 16C0 16.55 0.45 17 1 17H13C13.55 17 14 16.55 14 16C14 15.45 13.55 15 13 15H1C0.45 15 0 15.45 0 16Z"
+          fill="#FEFEFE"
+        />
+      </svg>
+
+      Export as CSV
+    </button>
+  </div>
+</div>
+<div class=" table-container mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container
+      [matColumnDef]="column"
+      *ngFor="let column of displayedColumns"
+    >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="colnamme customFontn">{{ column }}</span>
+      </th>
+
+      <td mat-cell *matCellDef="let row" class="customFontn">
+        <div
+          *ngIf="column != 'APPICONURL'"
+          class="rwostylll"
+          matTooltipClass="customTooltip"
+          #tooltip="matTooltip"
+          cdkScrollable
+          [matTooltip]="row[column]"
+          matTooltipPosition="above"
+        >
+          <span
+            class="status"
+            *ngIf="column === 'DeliveryStatus'"
+            [ngClass]="{
+              'green-status': row[column] === 'Delivered',
+              'red-status': row[column] === 'In Transit',
+              'yellow-status': row[column] === 'Not Dispatched'
+            }"
+          >
+            <p class="dot">.</p>
+            {{ row[column] }}
+          </span>
+
+          <span
+            class="status"
+            *ngIf="column === 'InstallationStatus'"
+            [ngClass]="{
+              'green-status': row[column] === 'Installed',
+              'red-status': row[column] === 'Not installed',
+              'yellow-status': row[column] === 'To be installed'
+            }"
+          >
+            <p class="dot">.</p>
+            {{ row[column] }}
+          </span>
+
+          <span
+            *ngIf="
+              column !== 'DeliveryStatus' &&
+              column !== 'InstallationStatus' &&
+              column !== 'Action'
+            "
+          >
+            {{ row[column] }}
+          </span>
+        </div>
+
+        <button
+          *ngIf="column === 'Action' && row[column] === 'Track'"
+          class="track-btn"
+        >
+          {{ row[column] }}
+        </button>
+
+        <div *ngIf="column == 'APPICONURL'">
+          <img [src]="row[column]" width="40" height="30" />
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+  <mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page of users"
+></mat-paginator>
+</div>

@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-container">
+      <img [src]="topnavImg" alt="Logo" class="logo">
+    </div>
+    
+    <h2 class="text-center">Login to Your Account</h2>
+    
+    <form [formGroup]="loginForm" class="login-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Enter your username" formControlName="username">
+        <mat-error *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched">
+          Please enter a valid username
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="fieldTypePass ? 'password' : 'text'" placeholder="Enter your password" formControlName="password">
+        <button mat-icon-button matSuffix (click)="togglePass()">
+          <mat-icon>{{ fieldTypePass ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+          Please enter a valid password
+        </mat-error>
+      </mat-form-field>
+      
+      <!-- <div class="actions">
+        <mat-checkbox (change)="checkRememberMe($event)">Remember Me</mat-checkbox>
+        <button mat-button color="primary" (click)="forgotpass()">Forgot password?</button>
+      </div> -->
+      
+      <button mat-flat-button color="primary" class="full-width" (click)="loginAPI()" [disabled]="loading || loginForm.invalid">
+        <ng-container *ngIf="!loading">Log in</ng-container>
+        <ng-container *ngIf="loading">
+          <mat-progress-spinner diameter="20" mode="indeterminate"></mat-progress-spinner> Please wait...
+        </ng-container>
+      </button>
+    </form>
+  </div>
+</div>

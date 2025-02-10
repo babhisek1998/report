@@ -1,0 +1,157 @@
+<div class="search_download_div">
+  <div>
+    <mat-form-field class="matformfield_input" appearance="outline">
+      <input matInput type="text" placeholder="Search" #input (keyup)="applyFilter($event)" />
+      <div mat-icon-button matSuffix [attr.aria-label]="'Search'">
+        <mat-icon class="icon">search</mat-icon>
+      </div>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button class="btn-custom">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM6 20C5.45 20 4.97933 19.8043 4.588 19.413C4.19667 19.0217 4.00067 18.5507 4 18V15H6V18H18V15H20V18C20 18.55 19.8043 19.021 19.413 19.413C19.0217 19.805 18.5507 20.0007 18 20H6Z"
+          fill="#FF6B11" />
+      </svg>
+      Export as CSV
+    </button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        <span class="colnamme mathfont mathfont">{{ column }}</span>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <div *ngIf="column != 'actions'" class="rwostylll mathfont" matTooltipClass="customTooltip" #tooltip="matTooltip"
+          cdkScrollable [matTooltip]="row[column]" matTooltipPosition="above">
+          <mat-icon class="green-dot"
+            *ngIf="column == 'STATUS' && row[column] == 'Active'">fiber_manual_record</mat-icon>
+          <mat-icon class="red-dot "
+            *ngIf="column == 'STATUS' && row[column] == 'InActive'">fiber_manual_record</mat-icon>
+          {{ row[column] }}
+        </div>
+        <div *ngIf="column == 'Action' && (userType=='ROLE_BOB_MAKER' || userType=='ROLE_ADMIN')" class="rwostylll" matTooltipClass="customTooltip" #tooltip="matTooltip"
+          cdkScrollable [matTooltip]="row[column]" matTooltipPosition="above">
+          <ng-container stickyEnd>
+            <button mat-button [matMenuTriggerFor]="menu" style="
+                border: none;
+                background-color: white;
+                font-size: 18px;
+                font-weight: 500;
+              ">
+              :
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon style="color: red">delete</mat-icon>Remove
+              </button>
+              <button mat-menu-item (click)="openEditModal()">
+                <mat-icon>edit</mat-icon>Edit
+              </button>
+            </mat-menu>
+          </ng-container>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+<ng-template #confirmMessage>
+  <div class="edit_div modal-content container">
+    <div class="d-flex custommflex mt-2 ml-1">
+      <div></div>
+      <div class="close_div py-1">
+        <div class="modal_heading mathfont">Edit User</div>
+      </div>
+      <div class="py-1">
+        <mat-icon class="crossicon" (click)="closeModal()">close</mat-icon>
+      </div>
+    </div>
+
+    <div class="modal_data">
+      <p class="mathfont" style="margin: 0; padding-top: 7px; color: green">
+        * Please make sure all the fields are filled
+      </p>
+    </div>
+    <div class="modal_1st_inps row p-3">
+      <div class="col-sm-12">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">Merchant Name</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Merchant Name" />
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">Merchant Delivery Address Line 1 *
+          </label>
+          <input type="email" class="form-control" id="exampleFormControlInput1"
+            placeholder="Merchant Delivery Address Line 1" />
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">Merchant Delivery Address Line 2 *</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1"
+            placeholder="Merchant Delivery Address Line 2" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">Pincode</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Pincode" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">State</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="State" />
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">Email Id</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Email Id" />
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">Mobile number</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Mobile Number" />
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="mb-1">
+          <label for="exampleFormControlInput1" class="form-label mathfont">VPA Id</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter VPA Id" />
+        </div>
+      </div>
+      <div class="btns">
+        <button type="button" style="border: none" class="btn btn-primary update_btn mathfont" (click)="closeModal()">
+          Update
+        </button>
+        <button type="button" style="
+            background-color: white;
+            color: orange;
+            border: 1px solid orange;
+          " class="btn btn-primary cancel_btn mathfont" (click)="closeModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

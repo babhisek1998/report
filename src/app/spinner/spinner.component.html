@@ -1,0 +1,109 @@
+<div id="http-loader" *ngIf="isSpinnerVisible">
+  <div class="loader-bg">
+    <!-- material-line -->
+    <!-- <div class="sk-line-material" [class.colored]="!backgroundColor" *ngIf="spinner === Spinkit.skLine">
+            <div class="sk-child sk-bounce1" [style.background-color]='backgroundColor'></div>
+        </div> -->
+
+    <div class="loader-spinner-container" *ngIf="spinner === Spinkit.skLine">
+      <div
+        id="NotiflixLoadingWrap"
+        class="notiflix-loading nx-with-animation"
+        style="
+          z-index: 4000;
+          background: rgba(0, 0, 0, 0.8);
+          animation-duration: 400ms;
+          font-family: Quicksand, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+            Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+          display: flex;
+          flex-flow: column wrap;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div
+          style="width: 80px; height: 80px"
+          class="notiflix-loading-icon nx-with-message"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="NXLoadingHourglass"
+            fill="forestgreen"
+            width="80px"
+            height="80px"
+            viewBox="0 0 200 200"
+          >
+            <g
+              data-animator-group="true"
+              data-animator-type="1"
+              style="
+                -webkit-animation-name: NXhourglass1-animation;
+                animation-name: NXhourglass1-animation;
+                -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+                transform-box: fill-box;
+              "
+            >
+              <g id="NXhourglass2" fill="inherit">
+                <g
+                  data-animator-group="true"
+                  data-animator-type="2"
+                  style="
+                    -webkit-animation-name: NXhourglass3-animation;
+                    animation-name: NXhourglass3-animation;
+                    -webkit-animation-timing-function: cubic-bezier(
+                      0.42,
+                      0,
+                      0.58,
+                      1
+                    );
+                    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+                    -webkit-transform-origin: 50% 100%;
+                    transform-origin: 50% 100%;
+                    transform-box: fill-box;
+                  "
+                  opacity=".4"
+                >
+                  <path
+                    id="NXhourglass4"
+                    d="M100 100l-34.38 32.08v31.14h68.76v-31.14z"
+                  ></path>
+                </g>
+                <g
+                  data-animator-group="true"
+                  data-animator-type="2"
+                  style="
+                    -webkit-animation-name: NXhourglass5-animation;
+                    animation-name: NXhourglass5-animation;
+                    -webkit-transform-origin: 50% 100%;
+                    transform-origin: 50% 100%;
+                    transform-box: fill-box;
+                  "
+                  opacity=".4"
+                >
+                  <path
+                    id="NXhourglass6"
+                    d="M100 100L65.62 67.92V36.78h68.76v31.14z"
+                  ></path>
+                </g>
+                <path
+                  d="M51.14 38.89h8.33v14.93c0 15.1 8.29 28.99 23.34 39.1 1.88 1.25 3.04 3.97 3.04 7.08s-1.16 5.83-3.04 7.09c-15.05 10.1-23.34 23.99-23.34 39.09v14.93h-8.33a4.859 4.859 0 1 0 0 9.72h97.72a4.859 4.859 0 1 0 0-9.72h-8.33v-14.93c0-15.1-8.29-28.99-23.34-39.09-1.88-1.26-3.04-3.98-3.04-7.09s1.16-5.83 3.04-7.08c15.05-10.11 23.34-24 23.34-39.1V38.89h8.33a4.859 4.859 0 1 0 0-9.72H51.14a4.859 4.859 0 1 0 0 9.72zm79.67 14.93c0 15.87-11.93 26.25-19.04 31.03-4.6 3.08-7.34 8.75-7.34 15.15 0 6.41 2.74 12.07 7.34 15.15 7.11 4.78 19.04 15.16 19.04 31.03v14.93H69.19v-14.93c0-15.87 11.93-26.25 19.04-31.02 4.6-3.09 7.34-8.75 7.34-15.16 0-6.4-2.74-12.07-7.34-15.15-7.11-4.78-19.04-15.16-19.04-31.03V38.89h61.62v14.93z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <p
+          id="NotiflixLoadingMessage"
+          class="nx-loading-message"
+          style="color: #dcdcdc; font-size: 15px"
+        >
+          Loading...
+        </p>
+      </div>
+    </div>
+    <!-- <div class="ring">Loading
+            <span></span>
+        </div> -->
+  </div>
+</div>

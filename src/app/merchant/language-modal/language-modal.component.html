@@ -1,0 +1,97 @@
+<div class="main_container">
+    <div class="showModal" *ngIf="!showSuccessModal">
+        <div class="header" style="font-size: 25px; padding-left: 1rem; padding-bottom: 1rem; text-align: center;">Language Update</div>      
+        <form [formGroup]="languageForm">
+            <div class="inps">
+              <div class="mb-3 inps_set">
+                <label for="serialNumber" class="form-label labelName">Serial number</label>
+                <input
+                  type="text"
+                  class="form-control inps_data"
+                  id="serialNumber"
+                  formControlName="serialNumber"
+                  placeholder="Enter Serial Number"
+                  readonly
+                />
+              </div>
+            </div>
+          
+            <div class="inps">
+              <div class="mb-3 inps_set">
+                <label for="vpiId" class="form-label labelName">VPI ID</label>
+                <input
+                  type="text"
+                  class="form-control inps_data"
+                  id="vpiId"
+                  formControlName="vpiId"
+                  placeholder="Enter VPI ID"
+                  readonly
+                />
+              </div>
+            </div>
+          
+            <div class="inps">
+              <div class="mb-3 inps_set">
+                <label for="currentLanguage" class="form-label labelName">Current Language</label>
+                <input
+                  type="text"
+                  class="form-control inps_data"
+                  id="currentLanguage"
+                  formControlName="currentLanguage"
+                  placeholder="Enter Current Language"
+                  readonly
+                />
+              </div>
+            </div>
+          
+            <div class="inps_set">
+              <label for="newLanguage" class="form-label labelName">Select New Language</label>
+              <select
+                class="form-select inps_data"
+                id="newLanguage"
+                formControlName="newLanguage"
+                aria-label="Default select example"
+              >
+                <option value="" disabled selected>Select a new language</option>
+                <option value="HINDI">Hindi</option>
+                <option value="ODIA">Odia</option>
+                <option value="MARATHI">Marathi</option>
+                <option value="TELUGU">Telugu</option>
+                <option value="KANNADA">Kannada</option>
+              </select>
+            </div>
+          <div class="btns">
+              <button type="submit" style="border: none;" class="btn btn-primary update_btn" [disabled]="languageForm.invalid" (click)="submit()">Update</button>
+              <button type="submit" style="background-color: white;color: orange;border: 1px solid orange;"
+               class="btn btn-primary cancel_btn" (click)="resetForm()">Cancel</button>
+          </div>
+          </form>
+    </div>
+
+    <div class="succes_div" *ngIf="showSuccessModal">
+        <div class="success_header" style="font-size: 25px; padding-left: 1rem; padding-bottom: 1rem; text-align: center;">
+            Language Update Success!
+        </div>
+        <div class="success_img">
+            <img style="height: 10rem;" [src]="successImage" alt="Logo">
+        </div>
+        <div class="text_data">
+            <div class="show_row row">
+                <div class="col-sm-6 d-flex">serial number </div>
+                <div class="col-sm-6 d-flex">{{ languageForm.get('serialNumber')?.value }}</div>
+                <div class="col-sm-6 d-flex">VPI ID</div>
+                <div class="col-sm-6 d-flex">{{ languageForm.get('vpiId')?.value }}</div>
+                <div class="col-sm-6 d-flex">Previous Language</div>
+                <div class="col-sm-6 d-flex">{{ languageForm.get('currentLanguage')?.value }}</div>
+                <div class="col-sm-6 d-flex">New language</div>
+                <div class="col-sm-6 d-flex">{{ languageForm.get('newLanguage')?.value | titlecase }}</div>
+            </div>
+        </div>
+        <div class="btns">
+            <button type="submit" style="border: none;" class="btn btn-primary update_btn" (click)="submit_success()" >Ok</button>
+            <button type="submit" style="background-color: white;color: orange;border: 1px solid orange;"
+             class="btn btn-primary cancel_btn">Cancel</button>
+        </div>
+    </div>
+
+</div>

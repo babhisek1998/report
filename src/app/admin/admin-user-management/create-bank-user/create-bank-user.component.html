@@ -1,0 +1,86 @@
+<h4 class="customTextColor">Create Bank User</h4>
+
+<div class="container">
+    <form [formGroup]="createUser">
+        <div class="row">
+            <div class="col-md-6 mt-4 createTag">
+                <label for="Name" class="mt-2 mb-2 customTextColor1">First Name</label>
+                <div class="input-box">
+                    <input type="text" class="form-control"
+                        [ngClass]="!createUser.get('firstname').valid && createUser.get('firstname').touched ?'btn_border':'btn_border2' "
+                        placeholder="Enter First Name" formControlName="firstname" (keypress)="onlyAlphabet($event)">
+                </div>
+                <div class="text-danger poscustom mt-1"
+                    *ngIf="createUser.get('firstname')?.hasError('required') && createUser.get('firstname')?.touched">
+                    First Name is Required.</div>
+            </div>
+            <div class="col-md-6 mt-4 createTag">
+                <label for="Name" class="mt-2 mb-2 customTextColor1">Last Name</label>
+                <div class="input-box">
+                    <input type="text" class="form-control " placeholder="Enter Last Name"
+                        [ngClass]="!createUser.get('lastname').valid && createUser.get('lastname').touched ?'btn_border':'btn_border2' "
+                        formControlName="lastname" (keypress)="onlyAlphabet($event)">
+                </div>
+                <div class="text-danger poscustom mt-1"
+                    *ngIf="createUser.get('lastname')?.hasError('required') && createUser.get('lastname')?.touched">Last
+                    Name is Required.</div>
+            </div>
+            <div class="col-md-6 mt-4 createTag">
+                <label for="Email" class="mt-2 mb-2 customTextColor1">Email</label>
+                <div class="input-box">
+                    <input type="text" class="form-control " placeholder="Enter Email"
+                        [ngClass]="!createUser.get('email').valid && createUser.get('email').touched ?'btn_border':'btn_border2' "
+                        formControlName="email">
+                </div>
+                <div class="text-danger poscustom  mt-1"
+                    *ngIf="createUser.get('email')?.hasError('required') && createUser.get('email')?.touched">Email is
+                    Required.</div>
+                <div class="text-danger poscustom mt-1" *ngIf="createUser.get('email')?.hasError('pattern')">Please
+                    Enter Valid Email.</div>
+            </div>
+            <div class="col-md-6 mt-4 createTag">
+                <label for="mobile" class="mt-2 mb-2 customTextColor1">Mobile Number</label>
+                <div class="input-box">
+                    <input type="text" class="form-control " placeholder="Enter Mobile Number"
+                        [ngClass]="!createUser.get('mobile').valid && createUser.get('mobile').touched ?'btn_border':'btn_border2' "
+                        formControlName="mobile" maxlength="10">
+                </div>
+                <div class="text-danger poscustom  mt-1"
+                    *ngIf="createUser.get('mobile')?.hasError('required') && createUser.get('mobile')?.touched">Mobile
+                    Number is Required.</div>
+                <div class="text-danger poscustom mt-1" *ngIf="createUser.get('mobile')?.hasError('pattern')">Please
+                    Enter Valid Mobile Number.
+                </div>
+            </div>
+            <div class="col-md-6 mt-4 createTag">
+                <label for="username" class="mt-2 mb-2 customTextColor1">User Name</label>
+                <div class="input-box">
+                    <input type="text" class="form-control"
+                        [ngClass]="!createUser.get('username').valid && createUser.get('username').touched ?'btn_border':'btn_border2' "
+                        placeholder="Enter User Name" formControlName="username">
+                </div>
+                <div class="text-danger poscustom  mt-1"
+                    *ngIf="createUser.get('username')?.hasError('required') && createUser.get('username')?.touched">User
+                    Name is Required.</div>
+
+            </div>
+            <div class="col-md-6 mt-4 createTag">
+                <label for="Userrole" class="mt-2 mb-2 customTextColor1">User Role</label>
+                <div class="input-box">
+                    <select name="userrole" id="userrole" class="form-select"
+                        [ngClass]="!createUser.get('user_role').valid && createUser.get('user_role').touched ?'btn_border':'btn_border2' "
+                        formControlName="user_role">
+                        <option value="" disabled class="custom-placeholder">Select User Role</option>
+                        <option value="7">Checker</option>
+                        <option value="6">Maker</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-5">
+                <button class="btn btn-custom3" [disabled]="createUser.invalid" (click)="Create()">Create</button>
+                <button class="btn btn-cancel mx-2" (click)="CancelForm()">Cancel</button>
+            </div>
+        </div>
+
+    </form>
+</div>

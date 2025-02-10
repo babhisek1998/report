@@ -1,0 +1,238 @@
+@if(page=='Inventory'){
+<div class="">
+    <div class="d-flex customFlessClass">
+        <div class="">
+            <h4 class="customTextColor">Inventory Status</h4>
+        </div>
+        <div class="">
+            <button class="btn customButton" type="button" (click)="gotoSingle()">New Order<mat-icon
+                    class="">add</mat-icon> </button>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card" style="height: 9rem;">
+                    <div class="card-body">
+                        <div class="d-flex customFlessClass">
+                            <div class="customWidth">
+                                <span class="customText">Total Purchased Devices</span>
+                            </div>
+                            <div class="">
+                                <mat-icon class="menuicon">devices</mat-icon>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="">
+                                <span><strong class="mr-4">12,22,000</strong><mat-icon
+                                        class="menuicon material-icons mx-2">north_west</mat-icon><span>+9%</span>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="height: 9rem;">
+                    <div class="card-body">
+                        <div class="d-flex customFlessClass">
+                            <div class="customWidth">
+                                <span class="customText">Total Mapped Devices</span>
+                            </div>
+                            <div class="">
+                                <mat-icon class="menuicon">devices</mat-icon>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="">
+                                <span><strong class="mr-4">76,000</strong><mat-icon
+                                        class="menuicon material-icons mx-2">north_west</mat-icon><span>+11%</span>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="height: 9rem;">
+                    <div class="card-body">
+                        <div class="d-flex customFlessClass">
+                            <div class="customWidth">
+                                <span class="customText">Total Unmapped Devices</span>
+                            </div>
+                            <div class="">
+                                <mat-icon class="menuicon">devices</mat-icon>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="">
+                                <span><strong class="mr-4">12,315</strong><mat-icon
+                                        class="menuicon material-icons mx-2">north_west</mat-icon><span>+9%</span>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="height: 9rem;">
+                    <div class="card-body">
+                        <div class="d-flex customFlessClass">
+                            <div class="customWidth">
+                                <span class="customText">Last Purchased Order</span>
+                            </div>
+                            <div class="">
+                                <mat-icon class="menuicon">devices</mat-icon>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="d-flex customFlessClass">
+                                <div class="">
+                                    <span><strong class="mr-4">21</strong></span>
+                                </div>
+                                <div class="">
+                                    <mat-icon
+                                        class="menuicon material-icons mx-2">calendar_today</mat-icon><span>11/11/24</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <app-data-table [columnss]="columns" [component]="component" [tableData]="dataForTable"></app-data-table>
+    </div>
+</div>
+}
+
+@if(page=='Order'){
+<div class="">
+    <h4 class="customTextColor">New Order</h4>
+</div>
+<div class="container mt-4">
+    <div class="form-check form-check-inline mr-4">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+            [(ngModel)]="selectedOption" value="single" />
+        <label class="form-check-label" for="inlineRadio1">Single</label>
+    </div>
+
+    <div class="form-check form-check-inline ml-4">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+            [(ngModel)]="selectedOption" value="bulk" />
+        <label class="form-check-label" for="inlineRadio1">Bulk</label>
+    </div>
+</div>
+@if(selectedOption === 'single'){
+<div class="container">
+    <div class="mt-2">
+        <form [formGroup]="singleForm">
+            <div class="row">
+                <div class="col-md-6 mathfont mt-4">
+                    <label for="vpaId">Type Of Device</label>
+                    <select name="typeDevice" id="typeDevice" class="form-select animated-input mt-2" formControlName="typeDevice">
+                        <option value="deviceType">Type Of Device</option>
+                        <option value="1a">Sound Box (UPI QR) Without Display</option>
+                        <option value="1b">Sound Box (UPI QR) With Display</option>
+                        <option value="2"> Sound Box (UPI QR) With NFC and Dynamic QR</option>
+                        <option value="3a"> Sound Box (UPI QR) with NFC (Without Display)</option>
+                        <option value="3b"> Sound Box (UPI QR) with NFC (With Display)</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mathfont mt-4">
+                    <label for="deviceserialNO">Number Of Devices</label>
+                    <input type="text" name="deviceserialNO" id="deviceserialNO" class="form-control animated-input mt-2"
+                        formControlName="numberOfDevice" placeholder="Enter Number Of Devices">
+                </div>
+                <div class="col-md-6 mathfont mt-4">
+                    <label for="subject">Zone</label>
+                    <select name="zone" id="zone" class="form-select animated-input mt-2" formControlName="zone">
+                        <option value="zone">Zone</option>
+                        <option value="zone">East</option>
+                        <option value="zone">West</option>
+                        <option value="zone">North</option>
+                        <option value="zone">South</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mathfont mt-4">
+                    <label for="Others">Address Line 1</label>
+                    <input type="text" name="addressLine1" id="addressLine1" class="form-control animated-input mt-2"
+                        placeholder="Enter Address Line 1" formControlName="addressLine1">
+                </div>
+                <div class="col-md-6 mathfont mt-4">
+                    <label for="phone">Address Line 2</label>
+                    <input type="text" name="addressLine2" id="addressLine2" class="form-control animated-input mt-2"
+                        placeholder="Enter Address Line 2" formControlName="addressLine2">
+                </div>
+                <div class="col-md-6 mathfont mt-4">
+                    <label for="phone">Pincode</label>
+                    <input type="text" name="pincode" id="pincode" class="form-control animated-input mt-2" placeholder="Enter Pincode"
+                        formControlName="pincode">
+                </div>
+            </div>
+        </form>
+
+        <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-custom3">Create</button>
+            <button class="btn btn-cancel mx-2" (click)="page='Inventory'">Cancel</button>
+        </div>
+    </div>
+</div>
+}
+
+@if(selectedOption === 'bulk'){
+<div class="mt-2">
+    <div class="d-flex justify-content-center mt-3">
+        <img src="../../../../assets/images/merchant/Frame 1171276956.png" alt="">
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+        <button class="btn btn-upload mx-3">Upload</button>
+        <button class="btn btn-reset">Reset</button>
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+        <span class="uploadtag">Please upload only Excel/CSV File (Soundbox_Device_Mapping.xlsx)*</span>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-download-sample"><span><img src="../../../../assets/images/merchant/Left icon.png"
+                    alt="">Download Sample File</span></button>
+    </div>
+
+    <div class="d-flex justify-content-end mt-5">
+        <button class="btn btn-custom3" (click)="openconfirmModal()">Upload</button>
+        <button class="btn btn-cancel mx-2" (click)="page='Inventory'">Cancel</button>
+    </div>
+
+</div>
+
+}
+
+}
+
+
+<ng-template #uploadMessage>
+    <div class="d-flex customFlkk px-3 py-3"><mat-icon (click)="closeModal()">close</mat-icon></div>
+    <div class="d-flex justify-content-center">
+        <div class="">
+            <img [src]="successUpload" alt="Success Upload" height="200">
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+        <div class="">
+            <span class="customText1">Upload Successful!!</span>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-2">
+        <div class="">
+            <span class="">Soundbox_Device_Mapping.xlsx Added Successfully</span>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-custom-close" (click)="closeModal()">Close</button>
+    </div>
+</ng-template>
