@@ -2,7 +2,7 @@
   <div class="orange-bg">
 
     <img [src]="topnavImg" alt="Logo" class="logo">
-    <button mat-icon-button *ngIf="!mobileQueryTablet.matches"
+    <button style="margin-left: 7rem;" mat-icon-button *ngIf="!mobileQueryTablet.matches"
       [ngClass]="toggle == true ? 'buttonClass MenuBtn' : 'buttonClass MenuHoverBtn'"
       (click)="btnClick();!mobileQueryTablet.matches?onhover = !onhover: '';!mobileQuery.matches?(!onhover ? increase() : decrease()):  isMenuOpen = !isMenuOpen">
       <mat-icon class="menuicon1">{{ mobileQuery.matches ? isMenuOpen ? 'menu_open' : 'menu' :onhover ?
@@ -20,9 +20,9 @@
         <mat-icon class="menuicon" [matBadge]="totalnotifycount" matBadgeColor="warn">notifications_active</mat-icon>
       </button> -->
       <div class="" style="display: inline-flex;">
-        <div class="input-group">
+        <div class="input-group" style="margin-right: 7rem;">
           <!-- Dropdown (Prefix) -->
-          <select class="form-select" [(ngModel)]="selectedCategory">
+          <select class="form-select" [(ngModel)]="selectedCategory" style="width: 12rem;">
             <option value="" selected disabled>Select</option>
             <option *ngFor="let category of categories" [value]="category">
               {{ category }}
@@ -30,7 +30,7 @@
           </select>
       
           <!-- Search Input with Autocomplete -->
-          <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search..." (input)="filterFoods()" list="foodList">
+          <input type="text" style="width: 13rem;" class="form-control" [(ngModel)]="searchText" placeholder="Search..." (input)="filterFoods()" list="foodList">
           
           <!-- Datalist for Autocomplete -->
           <datalist id="foodList">
