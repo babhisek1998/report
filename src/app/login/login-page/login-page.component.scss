@@ -1,20 +1,20 @@
-/* Centering login container */
+/* Center the login container */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #3f51b5, #1a237e, #388e3c, #1b5e20);
+  background-color: #f4f4f4;
 }
 
-/* Card styling */
+/* Login card styling */
 .login-card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -22,33 +22,70 @@
 .logo-container {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
 .logo {
-  width: 100px;
+  width: 80px;
   height: auto;
 }
 
-/* Form styling */
-.full-width {
+/* Full-width input fields */
+mat-form-field {
   width: 100%;
 }
 
-.actions {
+/* OTP Container Styling */
+.otp-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 15px 0;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
-/* Button styling */
-button[mat-flat-button] {
-  margin-top: 10px;
-  font-size: 16px;
+/* Styling for ng-otp-input */
+.ng-otp-input-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-/* Progress spinner alignment */
+.ng-otp-input-wrapper input {
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 18px;
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+
+.ng-otp-input-wrapper input:focus {
+  border-color: #3f51b5;
+  outline: none;
+}
+
+/* Login button */
+button.full-width {
+  width: 100%;
+  height: 45px;
+  margin-top: 1rem;
+}
+
+/* Loader text alignment */
 mat-progress-spinner {
   vertical-align: middle;
+}
+
+/* Responsive styles */
+@media (max-width: 480px) {
+  .login-card {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .ng-otp-input-wrapper input {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 16px;
+  }
 }

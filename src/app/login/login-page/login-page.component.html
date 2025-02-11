@@ -7,35 +7,28 @@
     <h2 class="text-center">Login to Your Account</h2>
     
     <form [formGroup]="loginForm" class="login-form">
+      <!-- Mobile Number Input -->
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="Enter your username" formControlName="username">
-        <mat-error *ngIf="loginForm.get('username').invalid && loginForm.get('username').touched">
-          Please enter a valid username
+        <mat-label>Mobile Number</mat-label>
+        <input matInput type="tel" placeholder="Enter your mobile number" formControlName="mobile" maxlength="10">
+        <mat-error *ngIf="loginForm.get('mobile').invalid && loginForm.get('mobile').touched">
+          Please enter a valid 10-digit mobile number
         </mat-error>
       </mat-form-field>
       
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput [type]="fieldTypePass ? 'password' : 'text'" placeholder="Enter your password" formControlName="password">
-        <button mat-icon-button matSuffix (click)="togglePass()">
-          <mat-icon>{{ fieldTypePass ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-        <mat-error *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
-          Please enter a valid password
+      <!-- OTP Input Field -->
+      <div class="otp-container">
+        <ng-otp-input 
+          [config]="otpConfig" 
+          (onInputChange)="onOtpChange($event)">
+        </ng-otp-input>
+        <mat-error *ngIf="loginForm.get('mpin').invalid && loginForm.get('mpin').touched">
+          Please enter the mpin
         </mat-error>
-      </mat-form-field>
-      
-      <!-- <div class="actions">
-        <mat-checkbox (change)="checkRememberMe($event)">Remember Me</mat-checkbox>
-        <button mat-button color="primary" (click)="forgotpass()">Forgot password?</button>
-      </div> -->
-      
-      <button mat-flat-button color="primary" class="full-width" (click)="loginAPI()" [disabled]="loading || loginForm.invalid">
-        <ng-container *ngIf="!loading">Log in</ng-container>
-        <ng-container *ngIf="loading">
-          <mat-progress-spinner diameter="20" mode="indeterminate"></mat-progress-spinner> Please wait...
-        </ng-container>
+      </div>
+
+      <button mat-flat-button color="primary" class="full-width" (click)="loginAPI()" [disabled]="loginForm.invalid">
+        <ng-container>Log in</ng-container>
       </button>
     </form>
   </div>
