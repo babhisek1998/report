@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { Router } from '@angular/router';
+import * as Notiflix from 'notiflix';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -90,12 +91,15 @@ export class LoginPageComponent {
        this._http.post(environment.login,reqbody).subscribe({
         next:(res:any)=>{
            console.log(res);
-           this.router.navigateByUrl('/admin/dashboard')
+           if (res) {
+             sessionStorage.setItem('access_token',res.data.token);
+             sessionStorage.setItem('mobile_number',res.data.mobileNumber);
+             Notiflix.Notify.success(res.message);
+             this.router.navigateByUrl('/admin/dashboard');
+           }
         },
         error:(err:any)=>{
-             console.log(err);
-             this.router.navigateByUrl('/admin/dashboard')
-             
+             console.log(err);             
         }
        })
       // this.loading = true;

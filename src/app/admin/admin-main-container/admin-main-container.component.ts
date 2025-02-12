@@ -70,7 +70,7 @@ const navitems: NavItem[] = [
     parent: false,
     displayName: 'Users',
     iconName: 'group', // Changed from 'computer' to 'group' for user management
-    route: 'devicemanagement',
+    route: 'users',
     show: 'N/A',
     type: true
   },
@@ -85,7 +85,7 @@ const navitems: NavItem[] = [
         parent: false,
         displayName: 'View',
         iconName: 'visibility', // Changed from 'verified_user' to 'visibility' for viewing
-        route: 'usermanagement/createbnkuser',
+        route: 'product/view',
         show: 'N/A',
         type:true
       },
@@ -93,7 +93,7 @@ const navitems: NavItem[] = [
         parent: false,
         displayName: 'Add',
         iconName: 'add_circle', // Changed from 'person_pin' to 'add_circle' for adding
-        route: 'usermanagement/createmerchant',
+        route: 'product/add',
         show: 'N/A',
         type:true
       },
@@ -101,7 +101,7 @@ const navitems: NavItem[] = [
         parent: false,
         displayName: 'Others',
         iconName: 'more_horiz', // Changed from 'supervisor_account' to 'more_horiz' for others/miscellaneous
-        route: 'usermanagement/showuser',
+        route: 'product/others',
         show: 'N/A',
         type: true
       }
@@ -111,7 +111,7 @@ const navitems: NavItem[] = [
     parent: false,
     displayName: 'Lead Manager',
     iconName: 'assignment', // Changed from 'inventory' to 'assignment' for lead management
-    route: 'inventorystat',
+    route: 'leadmanager',
     show: 'N/A',
     type:true
   },
@@ -119,7 +119,7 @@ const navitems: NavItem[] = [
     parent: false,
     displayName: 'Feature',
     iconName: 'star', // Changed from 'shopping_cart' to 'star' for features
-    route: 'devicedelivery',
+    route: 'feature',
     show: 'N/A',
     type:true
   }
@@ -230,7 +230,7 @@ export class AdminMainContainerComponent implements OnInit {
   totalnotifycount: string = '0';
   visible: boolean = false;
   changepassword_show: boolean = false;
-  categories = ['Fruits', 'Vegetables', 'Dairy'];
+  categories = ['Users', 'Products'];
   selectedCategory = '';
 
   foodItems = [

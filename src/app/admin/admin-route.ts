@@ -9,7 +9,32 @@ export default [
             {
                 path: 'dashboard',
                 loadComponent: () => import('./admin-dashboard/admin-dashboard.component').then((m) => m.AdminDashboardComponent)
+            },
+            {
+                path:'users',
+                loadComponent: () => import('./users/users.component').then((m) => m.UsersComponent)
+            },
+            {
+                path:'product/view',
+                loadComponent: () => import('./view/view.component').then((m) => m.ViewComponent)
+            },
+            {
+                path:'product/add',
+                loadComponent: () => import('./add/add.component').then((m) => m.AddComponent)
+            },
+            {
+                path:'product/others',
+                loadComponent: () => import('./others/others.component').then((m) => m.OthersComponent)
+            },
+            {
+                path:'leadmanager',
+                loadComponent: () => import('./lead-manager/lead-manager.component').then((m) => m.LeadManagerComponent)
+            },
+            {
+                path:'feature',
+                loadComponent: () => import('./feature/feature.component').then((m) => m.FeatureComponent)
             }
+        
         ]
 
     },

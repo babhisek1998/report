@@ -238,7 +238,7 @@ export function showDynamicModal(
     }
   
     // Method to show a new toast
-    show(content: string, classname = "", delay = 5000) {
+    show(content: string, classname = "", delay = 5000, p0: () => any, p1: {}) {
       if (content == "" && classname.includes("bg-danger")) {
         content = "Failed";
       } else if (content == "" && classname.includes("bg-success")) {
