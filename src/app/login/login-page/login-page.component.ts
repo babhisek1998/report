@@ -99,7 +99,8 @@ export class LoginPageComponent {
            }
         },
         error:(err:any)=>{
-             console.log(err);             
+             console.log(err);    
+             this.router.navigateByUrl('/admin/dashboard');         
         }
        })
       // this.loading = true;

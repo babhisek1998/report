@@ -1,1 +1,3 @@
-<p>users works!</p>
+<div class="table_show" *ngIf="res_data && res_data?.length > 0">
+    <app-dtable [page]="'users'" [reports]="res_data"></app-dtable>
+</div>

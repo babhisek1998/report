@@ -27,8 +27,12 @@ export default [
                 loadComponent: () => import('./others/others.component').then((m) => m.OthersComponent)
             },
             {
-                path:'leadmanager',
-                loadComponent: () => import('./lead-manager/lead-manager.component').then((m) => m.LeadManagerComponent)
+                path:'leadmanager/row-lead',
+                loadComponent: () => import('./row-lead/row-lead.component').then((m) => m.RowLeadComponent)
+            },
+            {
+                path:'leadmanager/proper-lead',
+                loadComponent: () => import('./proper-lead/proper-lead.component').then((m) => m.ProperLeadComponent)
             },
             {
                 path:'feature',

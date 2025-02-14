@@ -44,6 +44,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { map, startWith } from 'rxjs/operators';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DtableComponent } from '../dtable/dtable.component';
 export interface NavItem {
   displayName?: string;
   disabled?: boolean;
@@ -108,12 +109,30 @@ const navitems: NavItem[] = [
     ]
   },
   {
-    parent: false,
+    parent: true,
     displayName: 'Lead Manager',
     iconName: 'assignment', // Changed from 'inventory' to 'assignment' for lead management
-    route: 'leadmanager',
+    // route: 'leadmanager',
     show: 'N/A',
-    type:true
+    type:true,
+    children: [
+      {
+        parent: false,
+        displayName: 'row lead',
+        iconName: 'visibility', // Changed from 'verified_user' to 'visibility' for viewing
+        route: 'leadmanager/row-lead',
+        show: 'N/A',
+        type:true
+      },
+      {
+        parent: false,
+        displayName: 'proper lead',
+        iconName: 'add_circle', // Changed from 'person_pin' to 'add_circle' for adding
+        route: 'leadmanager/proper-lead',
+        show: 'N/A',
+        type:true
+      }
+    ]
   },
   {
     parent: false,
@@ -193,7 +212,7 @@ const navitems: NavItem[] = [
     HttpClientModule,
     PasswordModule,
     DividerModule,
-    MatTreeModule,MatAutocompleteModule],
+    MatTreeModule, MatAutocompleteModule],
   templateUrl: './admin-main-container.component.html',
   styleUrl: './admin-main-container.component.scss',
   providers: [MessageService],
