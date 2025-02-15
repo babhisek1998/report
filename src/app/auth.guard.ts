@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   private toastUtility = new ToastUtility();
   constructor(private router: Router) { }
   canActivate(): boolean {
-    if (sessionStorage.getItem('access_token')) {
+    if (!sessionStorage.getItem('access_token')) {
       this.logout();
       return false;
     }

@@ -513,12 +513,12 @@ export class DtableComponent implements OnInit {
     return this.statuses.at(index).get(controlName) as FormControl;
   }
   setVisibleColumns() {
-    this.visibleCols = this.visibleCols || parseInt(localStorage.getItem('columnCount')) || 7;
+    this.visibleCols = this.visibleCols || parseInt(localStorage.getItem('columnCount')) || 4;
     this.footColspan = this.visibleCols;
   
     const windowWidth = window.innerWidth;
     if (windowWidth > 1279) {
-      this.visibleCols = parseInt(localStorage.getItem('columnCount')) || 7;
+      this.visibleCols = parseInt(localStorage.getItem('columnCount')) || 4;
     } else if (windowWidth > 767) {
       this.visibleCols = 4;
     } else {
@@ -563,7 +563,7 @@ export class DtableComponent implements OnInit {
   }
   
   initializeTableData() {
-    const obj = this.page === 'users' || this.page === 'report' || this.page === 'show_user' || this.page === 'device_list' || this.page === 'device_delivery_status' ? this.reports : JSON.parse(this.reports);
+    const obj = this.page === 'users' || this.page === 'products' || this.page === 'show_user' || this.page === 'device_list' || this.page === 'device_delivery_status' ? this.reports : JSON.parse(this.reports);
     this.tbl = this.filteredTbl = obj;
     this.calcAmount();
   }
@@ -583,7 +583,7 @@ export class DtableComponent implements OnInit {
     this.option = [];
   
     this.filteredTbl.forEach((item:any, index:any) => {      
-      this.formatDateFields(item, ['created_date','Created Date']);
+      this.formatDateFields(item, ['createdDate','updatedDate' , 'lastLogin' , 'mpinCreatedDate','createdAt','updatedAt']);
       // this.formatUpdatedByField(item);
       this.formatTimeField(item);
       this.setDefaultValues(item, this.tcol);

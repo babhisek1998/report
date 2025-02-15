@@ -5,14 +5,14 @@
             <input placeholder="Search..." type="text" (keyup)="applyFilter($event)">
         </div>
     </div>
-    <div class="col-12 col-md-4 mb-2" *ngIf="page == 'users'">
+    <!-- <div class="col-12 col-md-4 mb-2" *ngIf="page == 'users'">
         <select class="form-select" style="width: 100%;" aria-label="Default select example">
             <option selected>Open this select menu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
-    </div>
+    </div> -->
     <div class="col-12 col-md-4 text-center">
         <button type="button" class="btn print_btn mb-3" (click)="downloadExcel(this.page)"
             [attr.disabled]="filteredTbl?.length ? null : 'disabled'"
@@ -174,7 +174,7 @@
     </table>
     <div *ngIf="noDataFound" class="no-data-container text-center center mt-5">
         <div class="">
-            <img src="../../../assets/images/nodata.png" alt="No Data Found" class="no-data-image mb-3">
+            <img src="../../../assets/reports/empty-box.png" alt="No Data Found" class="no-data-image mb-3">
         <p>No Data Found</p>
         </div>
       </div>
