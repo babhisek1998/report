@@ -1,0 +1,182 @@
+<div class="row mt-3">
+    <div class="col-12 col-md-4 mb-2">
+        <div class="search_box">
+            <em class="fas fa-search"></em>
+            <input placeholder="Search..." type="text" (keyup)="applyFilter($event)">
+        </div>
+    </div>
+    <!-- <div class="col-12 col-md-4 mb-2" *ngIf="page == 'users'">
+        <select class="form-select" style="width: 100%;" aria-label="Default select example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div> -->
+    <div class="col-12 col-md-4 text-center">
+        <button type="button" class="btn print_btn mb-3" (click)="downloadExcel(this.page)"
+            [attr.disabled]="filteredTbl?.length ? null : 'disabled'"
+            style="background: forestgreen; border: none">
+            <em class="fas fa-download"></em> Export to CSV
+        </button>
+    </div>
+</div>
+<div #TABLE class="table-responsive" (window:resize)="onResize($event)">
+    <table class="table table-bordered report-table" aria-label="User data table" style="background-color: #fff;" aria-describedby="tableDesc" *ngIf="!noDataFound" >
+        <thead>
+
+            <tr style="background: #c0c0c0; color: white;">
+                <ng-container *ngFor="let col of titles; index as k">
+                    <th id="" [ngClass]="{'squized':k >= visibleCols}" *ngIf="col != 'Gate Way Data'" class="textt">{{
+                         col
+                        }}
+                    </th>
+                </ng-container>
+                <th id="" *ngIf="expandBtn" class="textt">Expand</th>
+                <th id="" *ngIf="(page =='view_user') || page == 'device_delivery_status'" class="textt">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let tr of paging.data; index as i">
+                <tr>
+                    <ng-container *ngIf="showExpanded != i;else show_expanded">
+                        <ng-container *ngFor="let col of tcol; index as j">
+                            <td [ngClass]="{'squized':j >= visibleCols}" *ngIf="col != 'gateWayData'">
+                                <span *ngIf="dateIndex.indexOf(col) > -1;else notDate">{{tr[col] |
+                                    date : 'yyyy-MM'}}</span>
+                                <ng-template #notDate>
+                                    <span *ngIf="tr[col] !== 'MAPPED' && tr[col] !== 'UNMAPPED'">{{page == 'device_delivery_status' && col == 'Device delivery Status' || page == 'device_delivery_status' && col == 'Installed' ? null :tr[col]}}</span>                                                                                                                                                                                                                                                         
+                                </ng-template>
+
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #show_expanded>
+                        <td [attr.colspan]="visibleCols">
+                            <div class="flex">
+                                <ng-container *ngFor="let col of tcol; index as x">
+                                    <div class="data-block" *ngIf="titles[x] != 'Gate Way Data'">
+                                        <small>{{ 
+                                             titles[x]
+                                            }}</small>
+                                        <span *ngIf="dateIndex.indexOf(col) > -1;else convertDate">{{tr[col] |
+                                            date : 'yyyy-MM'}}</span>
+                                        <ng-template #convertDate>
+                                            <span *ngIf="tr[col] !== 'MAPPED' && tr[col] !== 'UNMAPPED'">{{page == 'device_delivery_status' && col == 'Device delivery Status' ? null :tr[col]}}</span>
+                                        </ng-template>
+
+                                    </div>
+                                </ng-container>
+                            </div>
+
+                        </td>
+                    </ng-template>
+                    <td *ngIf="expandBtn" class="text-center">
+                        <em class="btn-expand" [ngClass]="(showExpanded == i)?'fas fa-angle-up':'fas fa-angle-down'"
+                            (click)="(showExpanded == i)?showExpanded = -1:showExpanded = i"></em>
+                    </td>
+                    <td *ngIf="page =='device_delivery_status'" class="text-center">
+                        <button class="btn detail_btn text-white">
+                            <i class="fas fa-location-arrow"></i> Track
+                          </button>                          
+                    </td>
+                    <td *ngIf="page =='view_user'" class="text-center d-flex" style="gap: 1rem;">
+                        <!-- Approve Button -->
+                        <em 
+                          class="fas fa-check-circle approve_btn text-success" 
+                          (click)="opencomfirmationpopupModal('Approve',tr)"
+                          title="Approve"
+                        ></em>
+                      
+                        <!-- Reject Button -->
+                        <em 
+                          class="fas fa-times-circle reject_btn text-danger ms-2" 
+                          (click)="opencomfirmationpopupModal('Reject',tr)"
+                          title="Reject"
+                        ></em>
+                      </td>
+                      
+                </tr>
+            </ng-container>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td [attr.colspan]="visibleCols + (page?1:0) + (expandBtn?1:0) + (action?1:0) + (page=='cbcservice'?1:0) "
+                    style="padding: 0;">
+                    <div class="tfoot"
+                        style="background: forestgreen; border: 1px solid forestgreen; color: white;">
+                        <div class="d-flex" style="min-width: 130px;">
+                            <div class="mr-3">Data Limit: &nbsp; </div>
+                            <select (change)="changeLimit($event, true)" class="form-select px-1" style="width: 50px;">
+                                <option *ngFor="let option of pageLimitOptions" [value]="option"
+                                    [selected]="option == paging.limit">
+                                    {{option}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="d-flex mx-4" style="min-width: 130px;">
+                            <div class="mr-3">Column Limit: &nbsp; </div>
+                            <em class="fa fa-angle-left left-btn" [ngStyle]="{'color':colorObj.darkvibrant}"
+                                (click)="changeColLimit(visibleCols-1)"></em>
+                            <input type="text" (change)="changeColLimit($event)" class="form-control px-1"
+                                [value]="visibleCols" style="width:50px; text-align: center;" readonly />
+                            <em class="fa fa-angle-right right-btn" [ngStyle]="{'color':colorObj.darkvibrant}"
+                                (click)="changeColLimit(visibleCols+1)"></em>
+                        </div>
+                        <ul class="pagination pagesound">
+                            <li>
+                                <a title="go to first page" href="javascript:void(0)" role="button"
+                                    (click)="pageActive(1)"><em class="fa fa-backward" aria-hidden="true"></em></a>
+                            </li>
+                            <li>
+                                <a title="go to previous page" href="javascript:void(0)" role="button"
+                                    (click)="pageActive(paging.active - 1)"><em class="fa fa-angle-left"
+                                        aria-hidden="true"></em></a>
+                            </li>
+
+                            <ng-container *ngIf="paging.cnt > 6;else fullpagination">
+                                <li class="pages" [ngClass]="{'active':paging.active == (y+1)}"
+                                    *ngFor="let pn of counter(2) ;let y = index">
+                                    <a href="javascript:void(0)" (click)="pageActive(y+1)"> {{y+1}} </a>
+                                </li>
+                                <li *ngIf="paging.active > 3">....</li>
+                                <li class="pages" *ngIf="paging.active > 2 && paging.active < (paging.cnt)"
+                                    class="active">
+                                    <a href="javascript:void(0)"> {{paging.active}} </a>
+                                </li>
+                                <li *ngIf="(paging.cnt - 1) > paging.active">....</li>
+                                <li class="pages" [ngClass]="{'active':paging.active == paging.cnt}">
+                                    <a href="javascript:void(0)" (click)="pageActive(paging.cnt)"> {{paging.cnt}} </a>
+                                </li>
+                            </ng-container>
+                            <ng-template #fullpagination>
+                                <li class="pages" [ngClass]="{'active':paging.active == (y+1)}"
+                                    *ngFor="let pn of counter(paging.cnt) ;let y = index">
+                                    <a href="javascript:void(0)" (click)="pageActive(y+1)"> {{y+1}} </a>
+                                </li>
+                            </ng-template>
+
+                            <li>
+                                <a title="go to next page" href="javascript:void(0)" role="button"
+                                    (click)="pageActive(paging.active + 1)"><em class="fa fa-angle-right"
+                                        aria-hidden="true"></em></a>
+                            </li>
+                            <li>
+                                <a title="go to last page" href="javascript:void(0)" role="button"
+                                    (click)="pageActive(paging.cnt)"><em class="fa fa-forward"
+                                        aria-hidden="true"></em></a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div *ngIf="noDataFound" class="no-data-container text-center center mt-5">
+        <div class="">
+            <img src="../../../assets/reports/empty-box.png" alt="No Data Found" class="no-data-image mb-3">
+        <p>No Data Found</p>
+        </div>
+      </div>
+</div>
+  

@@ -24,6 +24,22 @@ export class AuthInterceptor implements HttpInterceptor {
        }
       })
     }
+    else if (req.url.includes('api/users')) { //Staging
+      req = req.clone({
+        setHeaders: {
+          'Content-Type': 'application/json',
+          'Authorization': access_token
+        }
+      })
+    }
+    else if (req.url.includes('api/products')) { //Staging
+      req = req.clone({
+        setHeaders: {
+          'Content-Type': 'application/json',
+          'Authorization': access_token
+        }
+      })
+    }
     else if (req.url.endsWith('user/dashboard')) { //Staging
       req = req.clone({
         setHeaders: {

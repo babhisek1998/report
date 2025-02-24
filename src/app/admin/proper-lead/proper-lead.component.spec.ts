@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeadManagerComponent } from './lead-manager.component';
+import { ProperLeadComponent } from './proper-lead.component';
 
-describe('LeadManagerComponent', () => {
-  let component: LeadManagerComponent;
-  let fixture: ComponentFixture<LeadManagerComponent>;
+describe('ProperLeadComponent', () => {
+  let component: ProperLeadComponent;
+  let fixture: ComponentFixture<ProperLeadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LeadManagerComponent]
+      imports: [ProperLeadComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(LeadManagerComponent);
+    fixture = TestBed.createComponent(ProperLeadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

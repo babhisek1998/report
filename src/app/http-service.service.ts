@@ -17,6 +17,9 @@ export class HttpServiceService {
   get(url: any) {
     return this.http.get(url);
   }
+  put(url:any,reqbody:any){
+      return this.http.put(url,reqbody)
+  }
 
   logout() {
     // localStorage.clear();

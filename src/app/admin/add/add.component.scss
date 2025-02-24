@@ -1,0 +1,67 @@
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f8f0;
+  }
+  .media-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 150px;
+  }
+  .media-box {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    background-color: #e8f5e9;
+  }
+  .media-btn {
+    color: #ffffff;
+    background-color: #4CAF50;
+  }
+  .form-section {
+    flex: 1;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .price-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .price-field {
+    flex: 1;
+  }
+  .unit-text {
+    white-space: nowrap;
+  }
+  .unit-field {
+    flex: 1;
+  }
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+  .green-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+    --mdc-tab-indicator-active-indicator-color: #4CAF50;
+    --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
+    --mat-tab-header-pagination-icon-color: black;
+    --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
+    --mat-tab-header-active-label-text-color: #4CAF50;
+    --mat-tab-header-active-ripple-color: #4CAF50;
+    --mat-tab-header-inactive-ripple-color: #4CAF50;
+    --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6);
+    --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
+    --mat-tab-header-active-focus-label-text-color: #4CAF50;
+    --mat-tab-header-active-hover-label-text-color: #4CAF50;
+    --mat-tab-header-active-focus-indicator-color: #4CAF50;
+    --mat-tab-header-active-hover-indicator-color: #4CAF50;
+}

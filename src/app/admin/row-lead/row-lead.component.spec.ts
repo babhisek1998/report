@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataTableComponent } from './data-table.component';
+import { RowLeadComponent } from './row-lead.component';
 
-describe('DataTableComponent', () => {
-  let component: DataTableComponent;
-  let fixture: ComponentFixture<DataTableComponent>;
+describe('RowLeadComponent', () => {
+  let component: RowLeadComponent;
+  let fixture: ComponentFixture<RowLeadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DataTableComponent]
+      imports: [RowLeadComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DataTableComponent);
+    fixture = TestBed.createComponent(RowLeadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

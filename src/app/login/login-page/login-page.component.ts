@@ -91,15 +91,16 @@ export class LoginPageComponent {
        this._http.post(environment.login,reqbody).subscribe({
         next:(res:any)=>{
            console.log(res);
-           if (res) {
+          //  if (res) {
              sessionStorage.setItem('access_token',res.data.token);
              sessionStorage.setItem('mobile_number',res.data.mobileNumber);
              Notiflix.Notify.success(res.message);
              this.router.navigateByUrl('/admin/dashboard');
-           }
+          //  }
         },
         error:(err:any)=>{
-             console.log(err);             
+             console.log(err);    
+            //  this.router.navigateByUrl('/admin/dashboard');         
         }
        })
       // this.loading = true;
