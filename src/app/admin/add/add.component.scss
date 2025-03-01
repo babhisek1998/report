@@ -1,67 +1,98 @@
 .container {
     display: flex;
     gap: 20px;
-    padding: 20px;
-    background-color: #f0f8f0;
   }
+  
   .media-sidebar {
+    flex: 0 0 200px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 150px;
+    gap: 15px;
   }
+  
   .media-box {
     text-align: center;
-    padding: 10px;
-    border: 1px solid #4CAF50;
-    border-radius: 5px;
-    background-color: #e8f5e9;
   }
+  
   .media-btn {
-    color: #ffffff;
-    background-color: #4CAF50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
+  
+  .preview-image {
+    max-width: 100px;
+    max-height: 100px;
+    display: block;
+    margin: 10px auto;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .preview-video {
+    max-width: 150px;
+    max-height: 100px;
+    display: block;
+    margin: 10px auto;
+  }
+  
   .form-section {
     flex: 1;
   }
+  
   .full-width {
     width: 100%;
   }
+  
   .price-container {
     display: flex;
     align-items: center;
     gap: 10px;
   }
+  
   .price-field {
     flex: 1;
   }
-  .unit-text {
-    white-space: nowrap;
-  }
+  
   .unit-field {
     flex: 1;
   }
+  
+  .unit-text {
+    white-space: nowrap;
+  }
+  
   .button-container {
     display: flex;
     justify-content: flex-end;
-    padding: 20px;
+    margin-top: 20px;
   }
-  .green-button {
-    background-color: #4CAF50;
-    color: white;
+  .media-btn {
+    background-color: forestgreen !important;
+    color: white !important;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
-    --mdc-tab-indicator-active-indicator-color: #4CAF50;
-    --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38);
-    --mat-tab-header-pagination-icon-color: black;
-    --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
-    --mat-tab-header-active-label-text-color: #4CAF50;
-    --mat-tab-header-active-ripple-color: #4CAF50;
-    --mat-tab-header-inactive-ripple-color: #4CAF50;
-    --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6);
-    --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6);
-    --mat-tab-header-active-focus-label-text-color: #4CAF50;
-    --mat-tab-header-active-hover-label-text-color: #4CAF50;
-    --mat-tab-header-active-focus-indicator-color: #4CAF50;
-    --mat-tab-header-active-hover-indicator-color: #4CAF50;
-}
+  
+  .media-btn mat-icon {
+    color: white !important;
+  }
+  
+  .button-container button {
+    background-color: forestgreen !important;
+    color: white !important;
+  }
+  ::ng-deep .mat-tab-label {
+    background-color: forestgreen !important;
+    color: white !important;
+    border-radius: 5px 5px 0 0; /* Optional: Rounded top corners */
+  }
+  
+  ::ng-deep .mat-tab-label.mat-tab-label-active {
+    background-color: forestgreen !important;
+    color: white !important;
+  }
+    

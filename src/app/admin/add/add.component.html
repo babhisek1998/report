@@ -1,53 +1,134 @@
 <mat-tab-group>
     <mat-tab label="Basic Details">
-      <div class="container">
-        <!-- Sidebar for media upload -->
-        <div class="media-sidebar">
-          <div class="media-box">
-            <button mat-button class="media-btn">
-              <mat-icon>photo_camera</mat-icon> Add Photo
-            </button>
+      <form [formGroup]="productForm" class="mt-4">
+        <div class="container">
+          <!-- Sidebar for media upload -->
+          <div class="media-sidebar">
+  
+            <!-- Upload Front Image -->
+            <div class="media-box">
+              <input type="file" #frontInput (change)="onFileSelected($event, 'front')" hidden accept="image/*" />
+              <button mat-button class="media-btn" (click)="frontInput.click()">
+                <mat-icon>photo_camera</mat-icon> Add Primary Image
+              </button>
+              <img *ngIf="frontPreview" [src]="frontPreview" class="preview-image" />
+            </div>
+  
+            <!-- Upload Back Image -->
+            <div class="media-box">
+              <input type="file" #backInput (change)="onFileSelected($event, 'back')" hidden accept="image/*" />
+              <button mat-button class="media-btn" (click)="backInput.click()">
+                <mat-icon>photo_camera</mat-icon> Add Secondary Image
+              </button>
+              <img *ngIf="backPreview" [src]="backPreview" class="preview-image" />
+            </div>
+  
+            <!-- Video URL Input Field Instead of Upload -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Video URL</mat-label>
+              <input matInput formControlName="videoUrl" placeholder="Enter Video URL" />
+              <mat-error *ngIf="productForm.get('videoUrl')?.hasError('pattern')">
+                Enter a valid URL.
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Upload PDF -->
+            <div class="media-box">
+              <input type="file" #pdfInput (change)="onFileSelected($event, 'pdf')" hidden accept="application/pdf" />
+              <button mat-button class="media-btn" (click)="pdfInput.click()">
+                <mat-icon>picture_as_pdf</mat-icon> Add PDF
+              </button>
+              <a *ngIf="pdfFile" [href]="pdfPreview" target="_blank">View PDF</a>
+            </div>
           </div>
-          <div class="media-box">
-            <button mat-button class="media-btn">
-              <mat-icon>videocam</mat-icon> Add Video
-            </button>
-          </div>
-          <div class="media-box">
-            <button mat-button class="media-btn">
-              <mat-icon>picture_as_pdf</mat-icon> Add PDF
-            </button>
+  
+          <!-- Form section -->
+          <div class="form-section">
+            <!-- Product Name -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Product/Service Name</mat-label>
+              <input matInput formControlName="productName" />
+              <mat-error *ngIf="productForm.get('productName')?.hasError('required')">
+                Product/Service Name is required.
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Brand -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Brand</mat-label>
+              <input matInput formControlName="brand" />
+              <mat-error *ngIf="productForm.get('brand')?.hasError('required')">
+                Brand is required.
+              </mat-error>
+            </mat-form-field>
+  
+            <div class="price-container">
+              <!-- Price -->
+              <mat-form-field appearance="outline" class="price-field">
+                <mat-label>Price</mat-label>
+                <input matInput formControlName="price" />
+                <mat-error *ngIf="productForm.get('price')?.hasError('required')">
+                  Price is required.
+                </mat-error>
+                <mat-error *ngIf="productForm.get('price')?.hasError('pattern')">
+                  Enter a valid price (numeric only).
+                </mat-error>
+              </mat-form-field>
+  
+              <span class="unit-text">per -</span>
+  
+              <!-- Unit -->
+              <mat-form-field appearance="outline" class="unit-field">
+                <input matInput placeholder="Enter Unit" formControlName="unit" />
+                <mat-error *ngIf="productForm.get('unit')?.hasError('required')">
+                  Unit is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+  
+            <!-- Sub Category -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Sub Category</mat-label>
+              <input matInput formControlName="subCategory" />
+              <mat-error *ngIf="productForm.get('subCategory')?.hasError('required')">
+                Sub Category is required.
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Category -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Category</mat-label>
+              <input matInput formControlName="category" />
+              <mat-error *ngIf="productForm.get('category')?.hasError('required')">
+                Category is required.
+              </mat-error>
+            </mat-form-field>
+  
+            <!-- Product Description -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Product/Service Description</mat-label>
+              <textarea matInput rows="5" formControlName="description"></textarea>
+              <mat-error *ngIf="productForm.get('description')?.hasError('required')">
+                Description is required.
+              </mat-error>
+              <mat-error *ngIf="productForm.get('description')?.hasError('minlength')">
+                Description must be at least 10 characters long.
+              </mat-error>
+            </mat-form-field>
           </div>
         </div>
-  
-        <!-- Form section -->
-        <div class="form-section">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Product/Service Name</mat-label>
-            <input matInput>
-          </mat-form-field>
-  
-          <div class="price-container">
-            <mat-form-field appearance="outline" class="price-field">
-              <mat-label>Price</mat-label>
-              <input matInput>
-            </mat-form-field>
-            <span class="unit-text">per -</span>
-            <mat-form-field appearance="outline" class="unit-field">
-              <input matInput placeholder="Enter Unit">
-            </mat-form-field>
-          </div>
-  
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Product/Service Description</mat-label>
-            <textarea matInput rows="5"></textarea>
-          </mat-form-field>
-        </div>
-      </div>
+      </form>
     </mat-tab>
   </mat-tab-group>
   
   <!-- Save and Continue Button -->
   <div class="button-container">
-    <button mat-raised-button color="primary">Save and Continue</button>
+    <button 
+      mat-raised-button 
+      style="background: forestgreen; color: white"
+      (click)="onSubmit()" 
+      [disabled]="!productForm.valid && (!pdfPreview && !backPreview && !frontPreview)">
+      Save and Continue
+    </button>
   </div>
+  

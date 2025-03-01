@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpServiceService {
-
+  private apiUrl = 'https://backend.ennomart.com/product/upload';
   constructor(private http: HttpClient, private router:Router) { }
 
   post(url: any, data: any): Observable<any> {
@@ -20,7 +20,9 @@ export class HttpServiceService {
   put(url:any,reqbody:any){
       return this.http.put(url,reqbody)
   }
-
+  uploadProduct(formData: FormData) {
+    return this.http.post(this.apiUrl, formData);
+  }
   logout() {
     // localStorage.clear();
 
