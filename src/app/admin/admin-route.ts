@@ -23,6 +23,10 @@ export default [
                 loadComponent: () => import('./add/add.component').then((m) => m.AddComponent)
             },
             {
+                path:'product/userproducts',
+                loadComponent: () => import('./productstore/productstore.component').then((m) => m.ProductstoreComponent)
+            },
+            {
                 path:'product/others',
                 loadComponent: () => import('./others/others.component').then((m) => m.OthersComponent)
             },

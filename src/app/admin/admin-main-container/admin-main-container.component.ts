@@ -100,6 +100,14 @@ const navitems: NavItem[] = [
       },
       {
         parent: false,
+        displayName: 'User Products',
+        iconName: 'add_circle', // Changed from 'person_pin' to 'add_circle' for adding
+        route: 'product/userproducts',
+        show: 'N/A',
+        type:true
+      },
+      {
+        parent: false,
         displayName: 'Others',
         iconName: 'more_horiz', // Changed from 'supervisor_account' to 'more_horiz' for others/miscellaneous
         route: 'product/others',

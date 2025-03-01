@@ -1,0 +1,23 @@
+<h2>Edit Product</h2>
+
+<div class="dialog-content">
+  <label>Product Name:</label>
+  <input [(ngModel)]="product.productName" type="text" />
+
+  <label>Brand:</label>
+  <input [(ngModel)]="product.brand" type="text" />
+
+  <label>Category:</label>
+  <input [(ngModel)]="product.categoryName" type="text" />
+
+  <label>Price:</label>
+  <input [(ngModel)]="product.price" type="number" />
+
+  <label>Description:</label>
+  <textarea [(ngModel)]="product.productDescription"></textarea>
+
+  <div class="dialog-actions">
+    <button (click)="cancel()">Cancel</button>
+    <button (click)="saveChanges()">Save</button>
+  </div>
+</div>
