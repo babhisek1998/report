@@ -10,6 +10,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf, NgStyle } from '@angular/common';
+import { HttpServiceService } from '../../http-service.service';
+import Notiflix from 'notiflix';
 
 @Component({
   selector: 'app-edit-product-dialog',
@@ -34,6 +36,7 @@ export class EditProductDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<EditProductDialogComponent>,
     private fb: FormBuilder,
+    private productService: HttpServiceService,
     @Inject(MAT_DIALOG_DATA) public product: any
   ) {
      this.productForm = this.fb.group({
@@ -47,9 +50,31 @@ export class EditProductDialogComponent {
           videoUrl:['',Validators.required],
           category: ['', Validators.required]
         });
+        console.log(product);
+  }
+  ngOnInit(){
+    this.productForm.patchValue({
+          productName: this.product.productName,
+          brand: this.product.brand,
+          price:  this.product.price,
+          unit:  this.product.categoryId,
+          description:  this.product.productDescription,
+          subCategory:  this.product.categoryName,
+          sellerId:  this.product.sellerUserId,
+          videoUrl:  this.product.productName,
+          category:  this.product.parentCategoryName
+    })
+    this.frontFile = this.product.primaryImageURL || null;
+    this.backFile = this.product.secondarImageURL || null;
+     // Load images from product data if paths exist
+  this.frontPreview = this.product.primaryImageURL || null;
+  this.backPreview = this.product.secondarImageURL || null;
+  // this.videoPreview = this.product.videoUrl || null;
+  // this.pdfPreview = this.product.pdfUrl || null;
   }
   onFileSelected(event: Event, type: string) {
     const file = (event.target as HTMLInputElement).files?.[0];
+  
     if (!file) return;
 
     const reader = new FileReader();
@@ -71,6 +96,42 @@ export class EditProductDialogComponent {
     };
     reader.readAsDataURL(file);
   }
+    onSubmit() {
+      if (!this.frontFile || !this.backFile || !this.pdfFile) {
+        Notiflix.Notify.failure("Please select all required files.");
+        return;
+      }
+    
+      const formData = new FormData();
+    
+      // Append files only if they exist
+      this.backFile ? formData.set('secondaryImage', this.backFile):'';
+      this.frontFile ? formData.set('primaryImage', this.frontFile):'';
+      this.pdfFile ? formData.set('pdfDocument', this.pdfFile):'';
+    
+      // Append text fields
+      formData.set('productName', this.productForm.value.productName);
+      formData.set('brand', this.productForm.value.brand);
+      formData.set('price', this.productForm.value.price);
+      formData.set('videoLink',this.productForm.get('videoUrl')?.value);
+      formData.set('unit', this.productForm.value.unit);
+      formData.set('description', this.productForm.value.description);
+      formData.set('subCategory', this.productForm.value.subCategory);
+      formData.set('category', this.productForm.value.category);
+      formData.set('sellerId', this.productForm.value.sellerId);
+      // Send API request
+      this.productService.uploadProduct(formData).subscribe({
+        next: (response:any) => {
+          console.log('Product uploaded successfully', response);
+          Notiflix.Notify.success(response.statusDesc);
+          this.saveChanges();
+        },
+        error: (error:any) => {
+          console.error('Upload failed:', error);
+          Notiflix.Notify.failure(error.error.statusDescption || 'Upload failed');
+        }
+      });
+    }
   saveChanges() {
     this.dialogRef.close(this.product);
   }
@@ -78,4 +139,5 @@ export class EditProductDialogComponent {
   cancel() {
     this.dialogRef.close();
   }
+
 }

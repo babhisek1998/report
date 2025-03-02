@@ -118,7 +118,7 @@
   <button 
     mat-raised-button 
     [ngStyle]="{ 'background-color': (productForm.valid && pdfPreview && backPreview && frontPreview) ? 'forestgreen' : '#a5d6a7', 'color': (productForm.valid && pdfPreview && backPreview && frontPreview) ? 'white' : '#6b8e23' }"
-    (click)="saveChanges()" 
+    (click)="onSubmit()" 
     [disabled]="(!productForm.valid && !pdfPreview && !backPreview && !frontPreview)">
     Save and Continue
   </button>
