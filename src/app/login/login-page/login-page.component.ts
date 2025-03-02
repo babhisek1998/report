@@ -91,10 +91,10 @@ export class LoginPageComponent {
        this._http.post(environment.login,reqbody).subscribe({
         next:(res:any)=>{
            console.log(res);
-          //  if (res) {
+           Notiflix.Notify[res.message ? 'success' : 'failure'](res.message || res.statuDesc);
+           //  if (res) {
              sessionStorage.setItem('access_token',res.data.token);
              sessionStorage.setItem('mobile_number',res.data.mobileNumber);
-             Notiflix.Notify.success(res.message);
              this.router.navigateByUrl('/admin/dashboard');
           //  }
         },

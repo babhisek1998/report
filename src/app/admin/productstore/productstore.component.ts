@@ -6,11 +6,15 @@ import Notiflix from 'notiflix';
 
 import { FormsModule } from '@angular/forms';
 import { EditProductDialogComponent } from '../edit-product-dialog/edit-product-dialog.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-productstore',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatDialogModule , EditProductDialogComponent],
+  imports: [CommonModule, FormsModule,MatFormFieldModule,MatInputModule,MatButtonModule, MatDialogModule ,MatCardModule, EditProductDialogComponent],
   templateUrl: './productstore.component.html',
   styleUrls: ['./productstore.component.scss']
 })
@@ -38,8 +42,9 @@ export class ProductstoreComponent {
         Notiflix.Loading.remove();
         this.products = response.status === 'SUCCESS' ? response.searchProductList : [];
       },
-      () => {
+      (err:any) => {
         Notiflix.Loading.remove();
+        Notiflix.Notify.failure(err.error.statusDescption)
         this.products = [];
       }
     );
@@ -47,7 +52,7 @@ export class ProductstoreComponent {
 
   editProduct(product: any) {
     const dialogRef = this.dialog.open(EditProductDialogComponent, {
-      width: '500px',
+      width: '60rem',
       data: { ...product }
     });
 

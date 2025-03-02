@@ -1,57 +1,75 @@
-.container {
-    width: 80%;
-    margin: auto;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-
-.search-box input {
-    padding: 8px;
-    font-size: 16px;
-    width: 250px;
-    margin-right: 10px;
-}
-
-.search-box button {
-    padding: 8px 12px;
-    background-color: #ff9f00;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    justify-content: center;
-}
-
-.product-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    background: #fff;
-    text-align: left;
-}
-
-.product-image {
+.product-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  .search-box {
     width: 100%;
-    max-height: 200px;
+    max-width: 500px;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .img_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .full-width {
+    width: 100%;
+  }
+  
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .product-card {
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-image {
+    height: 180px;
     object-fit: cover;
-}
-
-.edit-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
+    border-bottom: 2px solid #f1f1f1;
+  }
+  .forestgreen-button {
+    background-color: forestgreen !important;
+    color: white !important;
+  }
+  
+  .forestgreen-button:hover {
+    background-color: #228b22 !important; /* Darker green on hover */
+  }
+  
+  .brand,
+  .category,
+  .description {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .price {
+    font-size: 1.2rem;
     font-weight: bold;
-    border-radius: 5px;
-}
-
-.edit-button:hover {
-    background-color: #0056b3;
-}
+    color: #1e88e5;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  

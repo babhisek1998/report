@@ -1,55 +1,61 @@
 <mat-tab-group>
     <mat-tab label="Basic Details">
-      <form [formGroup]="productForm" class="mt-4">
-        <div class="container">
-          <!-- Sidebar for media upload -->
-          <div class="media-sidebar">
+      <form [formGroup]="productForm" class="form-container">
+        <div class="grid-container">
+          <!-- Left Section: Media Upload -->
+          <mat-card class="media-card">
+            <mat-card-title>Upload Media</mat-card-title>
+            <mat-divider></mat-divider>
   
             <!-- Upload Front Image -->
-            <div class="media-box">
+            <div class="upload-box mt-2">
               <input type="file" #frontInput (change)="onFileSelected($event, 'front')" hidden accept="image/*" />
-              <button mat-button class="media-btn" (click)="frontInput.click()">
+              <button mat-raised-button color="primary" (click)="frontInput.click()">
                 <mat-icon>photo_camera</mat-icon> Add Primary Image
               </button>
               <img *ngIf="frontPreview" [src]="frontPreview" class="preview-image" />
             </div>
   
             <!-- Upload Back Image -->
-            <div class="media-box">
+            <div class="upload-box">
               <input type="file" #backInput (change)="onFileSelected($event, 'back')" hidden accept="image/*" />
-              <button mat-button class="media-btn" (click)="backInput.click()">
+              <button mat-raised-button color="accent" (click)="backInput.click()">
                 <mat-icon>photo_camera</mat-icon> Add Secondary Image
               </button>
               <img *ngIf="backPreview" [src]="backPreview" class="preview-image" />
             </div>
   
-            <!-- Video URL Input Field Instead of Upload -->
+            <!-- Video URL Input -->
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Video URL</mat-label>
               <input matInput formControlName="videoUrl" placeholder="Enter Video URL" />
-              <mat-error *ngIf="productForm.get('videoUrl')?.hasError('pattern')">
-                Enter a valid URL.
+              <mat-error *ngIf="productForm.get('videoUrl')?.hasError('required')">
+                Required field.
               </mat-error>
+              <mat-error *ngIf="productForm.get('videoUrl')?.hasError('pattern')">Enter a valid URL.</mat-error>
             </mat-form-field>
   
             <!-- Upload PDF -->
-            <div class="media-box">
+            <div class="upload-box">
               <input type="file" #pdfInput (change)="onFileSelected($event, 'pdf')" hidden accept="application/pdf" />
-              <button mat-button class="media-btn" (click)="pdfInput.click()">
+              <button mat-raised-button color="warn" (click)="pdfInput.click()">
                 <mat-icon>picture_as_pdf</mat-icon> Add PDF
               </button>
-              <a *ngIf="pdfFile" [href]="pdfPreview" target="_blank">View PDF</a>
+              <a *ngIf="pdfFile" [href]="pdfPreview" target="_blank" class="pdf-link">View PDF</a>
             </div>
-          </div>
+          </mat-card>
   
-          <!-- Form section -->
-          <div class="form-section">
+          <!-- Right Section: Product Details -->
+          <mat-card class="details-card">
+            <mat-card-title>Product Details</mat-card-title>
+            <mat-divider></mat-divider>
+  
             <!-- Product Name -->
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Product/Service Name</mat-label>
               <input matInput formControlName="productName" />
               <mat-error *ngIf="productForm.get('productName')?.hasError('required')">
-                Product/Service Name is required.
+                Required field.
               </mat-error>
             </mat-form-field>
   
@@ -57,78 +63,64 @@
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Brand</mat-label>
               <input matInput formControlName="brand" />
-              <mat-error *ngIf="productForm.get('brand')?.hasError('required')">
-                Brand is required.
-              </mat-error>
+              <mat-error *ngIf="productForm.get('brand')?.hasError('required')">Required field.</mat-error>
             </mat-form-field>
   
+            <!-- Price & Unit -->
             <div class="price-container">
-              <!-- Price -->
               <mat-form-field appearance="outline" class="price-field">
                 <mat-label>Price</mat-label>
                 <input matInput formControlName="price" />
-                <mat-error *ngIf="productForm.get('price')?.hasError('required')">
-                  Price is required.
-                </mat-error>
-                <mat-error *ngIf="productForm.get('price')?.hasError('pattern')">
-                  Enter a valid price (numeric only).
-                </mat-error>
+                <mat-error *ngIf="productForm.get('price')?.hasError('required')">Required field.</mat-error>
               </mat-form-field>
   
-              <span class="unit-text">per -</span>
-  
-              <!-- Unit -->
               <mat-form-field appearance="outline" class="unit-field">
-                <input matInput placeholder="Enter Unit" formControlName="unit" />
-                <mat-error *ngIf="productForm.get('unit')?.hasError('required')">
-                  Unit is required.
-                </mat-error>
+                <mat-label>Unit</mat-label>
+                <input matInput formControlName="unit" />
+                <mat-error *ngIf="productForm.get('unit')?.hasError('required')">Required field.</mat-error>
               </mat-form-field>
             </div>
   
-            <!-- Sub Category -->
-            <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Sub Category</mat-label>
-              <input matInput formControlName="subCategory" />
-              <mat-error *ngIf="productForm.get('subCategory')?.hasError('required')">
-                Sub Category is required.
-              </mat-error>
-            </mat-form-field>
-  
-            <!-- Category -->
+            <!-- Category & Sub-category -->
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Category</mat-label>
               <input matInput formControlName="category" />
-              <mat-error *ngIf="productForm.get('category')?.hasError('required')">
-                Category is required.
-              </mat-error>
+              <mat-error *ngIf="productForm.get('category')?.hasError('required')">Required field.</mat-error>
             </mat-form-field>
   
-            <!-- Product Description -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Sub Category</mat-label>
+              <input matInput formControlName="subCategory" />
+              <mat-error *ngIf="productForm.get('subCategory')?.hasError('required')">Required field.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Seller Id</mat-label>
+              <input matInput formControlName="sellerId" />
+              <mat-error *ngIf="productForm.get('sellerId')?.hasError('required')">Required field.</mat-error>
+            </mat-form-field>
+  
+            <!-- Description -->
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Product/Service Description</mat-label>
               <textarea matInput rows="5" formControlName="description"></textarea>
               <mat-error *ngIf="productForm.get('description')?.hasError('required')">
-                Description is required.
-              </mat-error>
-              <mat-error *ngIf="productForm.get('description')?.hasError('minlength')">
-                Description must be at least 10 characters long.
+                Required field.
               </mat-error>
             </mat-form-field>
-          </div>
+          </mat-card>
         </div>
       </form>
     </mat-tab>
   </mat-tab-group>
   
-  <!-- Save and Continue Button -->
+  <!-- Save & Continue Button -->
   <div class="button-container">
     <button 
-      mat-raised-button 
-      style="background: forestgreen; color: white"
-      (click)="onSubmit()" 
-      [disabled]="!productForm.valid && (!pdfPreview && !backPreview && !frontPreview)">
-      Save and Continue
-    </button>
+    mat-raised-button 
+    [ngStyle]="{ 'background-color': (productForm.valid && pdfPreview && backPreview && frontPreview) ? 'forestgreen' : '#a5d6a7', 'color': (productForm.valid && pdfPreview && backPreview && frontPreview) ? 'white' : '#6b8e23' }"
+    (click)="onSubmit()" 
+    [disabled]="(!productForm.valid && !pdfPreview && !backPreview && !frontPreview)">
+    Save and Continue
+  </button>
   </div>
   

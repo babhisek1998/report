@@ -1,26 +1,33 @@
-<div class="container">
-    <h2>Product Search</h2>
-
-    <div class="search-box">
-        <input type="text" [(ngModel)]="userId" placeholder="Enter User ID" />
-        <button (click)="searchProductById()">Search</button>
-    </div>
-
-    <div *ngIf="products.length > 0" class="mt-4">
-        <div class="product-grid">
-            <div *ngFor="let product of products" class="product-card">
-                <img [src]="product.primaryImageURL || 'assets/default-product.jpg'" [alt]="product.productName" class="product-image" />
-                <div class="product-details">
-                    <h3>{{ product.productName }}</h3>
-                    <p class="brand">Brand: {{ product.brand }}</p>
-                    <p class="category">Category: {{ product.categoryName }} ({{ product.parentCategoryName }})</p>
-                    <p class="description">{{ product.productDescription }}</p>
-                    <p class="price">₹{{ product.price }}</p>
-                    <button class="edit-button" (click)="editProduct(product)">
-                        ✏️ Edit
-                    </button>
-                </div>
-            </div>
+<div class="product-search-container">
+    <mat-card class="search-box">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Enter User ID</mat-label>
+        <input matInput [(ngModel)]="userId" placeholder="User ID" />
+      </mat-form-field>
+      <button mat-raised-button [ngStyle]="{ 'background-color': userId ? 'forestgreen' : '#a5d6a7', 'color': userId ? 'white' : '#6b8e23' }"
+      [disabled]="!userId" (click)="searchProductById()">🔍 Search</button>
+    </mat-card>
+  
+    <div *ngIf="products.length > 0" class="product-list">
+      <mat-card *ngFor="let product of products" class="product-card">
+        <div class="img_box">
+            <img
+          [src]="product.primaryImageURL || 'assets/default-product.jpg'"
+          [alt]="product.productName"
+          class="product-image mt-2"
+        />
         </div>
+        <mat-card-content>
+          <h3>{{ product.productName }}</h3>
+          <p class="brand">Brand: <strong>{{ product.brand }}</strong></p>
+          <p class="category">Category: <strong>{{ product.categoryName }} ({{ product.parentCategoryName }})</strong></p>
+          <p class="description">{{ product.productDescription }}</p>
+          <p class="price">₹{{ product.price }}</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-stroked-button color="accent" (click)="editProduct(product)">✏️ Edit</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
-</div>
+  </div>
+  
