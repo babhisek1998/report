@@ -40,11 +40,11 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       })
     }
-    else if (req.url.includes('product/upload')) { //Staging
+    else if (req.url.includes('product/admin/upload')) { //Staging
       req = req.clone({
         setHeaders: {
           'Authorization': access_token,
-          "user-id":"9178503700"
+          "user-id": sessionStorage.getItem('mobile_number')
         }
       })
     }

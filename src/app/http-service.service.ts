@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpServiceService {
-  private apiUrl = 'https://backend.ennomart.com/product/upload';
+  private apiUrl = 'https://backend.ennomart.com/product/admin/upload';
   constructor(private http: HttpClient, private router:Router) { }
 
   post(url: any, data: any): Observable<any> {
