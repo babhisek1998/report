@@ -1,54 +1,36 @@
-.dashboardclass{
-  position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: forestgreen;
+  color: #fff;
+  border-radius: 20px;
 }
 
-.customfont{
-    font-family: montserrat, arial, verdana;
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 }
 
+.summary-cards {
+  display: flex;
+  gap: 15px;
+  justify-content: space-around;
+}
 
-.customFlessClass {
-    justify-content: space-between;
-  }
-  
-  .customText {
-    font-family: montserrat, arial, verdana;
-    font-weight: 500;
-  }
-  .customText1 {
-    font-family: montserrat, arial, verdana;
-    font-weight: 500;
-    font-size: x-large;
-  }
-  
-  .menuicon {
-    cursor: pointer;
-    color: forestgreen !important;
-  
-  }
-  
-  .material-icons {
-    display: inline-flex;
-    vertical-align: text-bottom;
-  }
-  
-  .customWidth {
-    width: 9rem;
-  }
-  
-  .customButton {
-    background-color: forestgreen;
-    color: white;
-  }
+.summary-card {
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+}
 
+.chart-container {
+  display: flex;
+  gap: 20px;
+}
 
-
-.customTextColor {
-  color: #383737;
-  font-weight: 600;
-  font-family: montserrat, arial, verdana;
+.chart {
+  flex: 1;
 }

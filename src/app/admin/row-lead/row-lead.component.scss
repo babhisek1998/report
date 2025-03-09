@@ -1,0 +1,12 @@
+.login-button:enabled {
+    background: #2d7a4b;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .login-button:disabled {
+    background: #b0c4b1;
+  }

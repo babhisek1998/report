@@ -10,13 +10,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { DtableComponent } from '../dtable/dtable.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-view',
   standalone: true,
   imports: [DtableComponent,NgIf,  MatProgressBarModule,
       MatAutocompleteModule,ReactiveFormsModule,  MatSliderModule,
-      MatInputModule,MatTabsModule,NgClass],
+      MatInputModule,MatTabsModule,MatCardModule,MatButtonModule,MatToolbarModule],
   templateUrl: './view.component.html',
   styleUrl: './view.component.scss'
 })

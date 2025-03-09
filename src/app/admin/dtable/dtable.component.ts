@@ -563,7 +563,7 @@ export class DtableComponent implements OnInit {
   }
   
   initializeTableData() {
-    const obj = this.page === 'users' || this.page === 'products' || this.page === 'show_user' || this.page === 'device_list' || this.page === 'device_delivery_status' ? this.reports : JSON.parse(this.reports);
+    const obj = this.page === 'users' || this.page === 'row_lead' || this.page === 'products' || this.page === 'show_user' || this.page === 'device_list' || this.page === 'device_delivery_status' ? this.reports : JSON.parse(this.reports);
     this.tbl = this.filteredTbl = obj;
     this.calcAmount();
   }

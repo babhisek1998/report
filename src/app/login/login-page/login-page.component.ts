@@ -40,7 +40,7 @@ import { environment } from '../../../environments/environment.development';
 })
 export class LoginPageComponent {
   show: boolean = false;
-  topnavImg = '../assets/images/loginpage/topicon.png';
+  topnavImg = '../../../assets/images/loginpage/Ennomart-png-logo.png';
   loginForm: FormGroup;
   fieldTypePass: boolean = true;
   fieldTypePass2: boolean = true;

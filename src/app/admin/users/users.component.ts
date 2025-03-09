@@ -11,12 +11,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 @Component({
   selector: 'app-users',
   standalone: true,
   imports: [DtableComponent,NgIf,  MatProgressBarModule,
     MatAutocompleteModule,ReactiveFormsModule,  MatSliderModule,
-    MatInputModule,MatTabsModule,NgClass],
+    MatInputModule,MatTabsModule,MatCardModule,MatButtonModule,MatToolbarModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })

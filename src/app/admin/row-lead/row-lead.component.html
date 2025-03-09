@@ -1,1 +1,51 @@
-<p>row-lead works!</p>
+<div class="card p-3">
+    <form [formGroup]="searchForm" (ngSubmit)="row_fetch()">
+        <div class="row">
+            <!-- Start Date -->
+            <div class="col-md-4">
+                <label for="leadDate" class="form-label">Start Date</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>MM/DD/YYYY</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="leadDate" [min]="enddate" [max]="today"
+                        id="leadDate" required />
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="searchForm.get('leadDate').hasError('required')">
+                        Start Date is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <!-- Seller ID -->
+            <div class="col-md-4">
+                <label for="sellerId" class="form-label">Seller ID</label>
+                <mat-form-field appearance="outline" class="w-100">
+                    <input matInput placeholder="Enter Seller ID" formControlName="sellerId" id="sellerId" required />
+                    <mat-error *ngIf="searchForm.get('sellerId').hasError('required')">
+                        Seller ID is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-md-3">
+                <button mat-raised-button class="login-button" style="margin-top: 38px;" [disabled]="searchForm.invalid">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-container *ngIf="page === 'row_lead'">
+    <!-- Data Table -->
+    <div *ngIf="res_data?.length > 0">
+        <app-dtable [reports]="res_data" [page]="'row_lead'" [visibleCols]="3" (u_detail)="page = $event"
+            [columns]="columns">
+        </app-dtable>
+    </div>
+
+    <!-- No Data Found -->
+    <div *ngIf="noDataFound" class="text-center mt-5">
+        <img src="../../../assets/reports/empty-box.png" alt="No Data Found" class="no-data-image mb-3">
+        <p>No Data Found</p>
+    </div>
+</ng-container>

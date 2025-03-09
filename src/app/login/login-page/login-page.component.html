@@ -1,35 +1,42 @@
 <div class="login-container">
-  <div class="login-card">
-    <div class="logo-container">
-      <img [src]="topnavImg" alt="Logo" class="logo">
-    </div>
-    
-    <h2 class="text-center">Login to Your Account</h2>
-    
-    <form [formGroup]="loginForm" class="login-form">
-      <!-- Mobile Number Input -->
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Mobile Number</mat-label>
-        <input matInput type="tel" placeholder="Enter your mobile number" formControlName="mobile" maxlength="10">
-        <mat-error *ngIf="loginForm.get('mobile').invalid && loginForm.get('mobile').touched">
-          Please enter a valid 10-digit mobile number
-        </mat-error>
-      </mat-form-field>
-      
-      <!-- OTP Input Field -->
-      <div class="otp-container">
-        <ng-otp-input 
-          [config]="otpConfig" 
-          (onInputChange)="onOtpChange($event)">
-        </ng-otp-input>
-        <mat-error *ngIf="loginForm.get('mpin').invalid && loginForm.get('mpin').touched">
-          Please enter the mpin
-        </mat-error>
+  <div class="left-section">
+    <img [src]="'../../../assets/images/loginpage/3094352.jpg'" alt="Login Illustration" class="login-image">
+  </div>
+
+  <div class="right-section">
+    <div class="login-card">
+      <div class="logo-container">
+        <img [src]="topnavImg" alt="Logo" class="logo">
       </div>
 
-      <button mat-raised-button class="forestgreen-button full-width" (click)="loginAPI()" [disabled]="loginForm.invalid">
-        Log in
-      </button>
-    </form>
+      <h2 class="text-center">Welcome Back</h2>
+      <p class="text-center subtitle">Sign in to access your account</p>
+
+      <form [formGroup]="loginForm" class="login-form">
+        <!-- Mobile Number Input -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput type="tel" placeholder="Enter your mobile number" formControlName="mobile" maxlength="10">
+          <mat-error *ngIf="loginForm.get('mobile').invalid && loginForm.get('mobile').touched">
+            Please enter a valid 10-digit mobile number
+          </mat-error>
+        </mat-form-field>
+
+        <!-- OTP Input Field -->
+        <div class="otp-container">
+          <ng-otp-input 
+            [config]="otpConfig" 
+            (onInputChange)="onOtpChange($event)">
+          </ng-otp-input>
+          <mat-error *ngIf="loginForm.get('mpin').invalid && loginForm.get('mpin').touched">
+            Please enter the MPIN
+          </mat-error>
+        </div>
+
+        <button mat-raised-button class="login-button full-width" (click)="loginAPI()" [disabled]="loginForm.invalid">
+          Log in
+        </button>
+      </form>
+    </div>
   </div>
 </div>

@@ -1,23 +1,15 @@
 <div class="row mt-3">
-    <div class="col-12 col-md-4 mb-2">
+    <div class="col-12 col-md-10 mb-2">
         <div class="search_box">
             <em class="fas fa-search"></em>
             <input placeholder="Search..." type="text" (keyup)="applyFilter($event)">
         </div>
     </div>
-    <!-- <div class="col-12 col-md-4 mb-2" *ngIf="page == 'users'">
-        <select class="form-select" style="width: 100%;" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-    </div> -->
-    <div class="col-12 col-md-4 text-center">
+    <div class="col-12 col-md-2 text-center">
         <button type="button" class="btn print_btn mb-3" (click)="downloadExcel(this.page)"
             [attr.disabled]="filteredTbl?.length ? null : 'disabled'"
             style="background: forestgreen; border: none">
-            <em class="fas fa-download"></em> Export to CSV
+            <em class="fas fa-download"></em> Export to excel
         </button>
     </div>
 </div>
@@ -32,8 +24,8 @@
                         }}
                     </th>
                 </ng-container>
-                <th id="" *ngIf="expandBtn" class="textt">Expand</th>
-                <th id="" *ngIf="(page =='view_user') || page == 'device_delivery_status'" class="textt">Action</th>
+                <th id="" *ngIf="expandBtn && page !== 'row_lead'" class="textt">Expand</th>
+                <th id="" *ngIf="(page =='view_user') || page == 'row_lead'" class="textt">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -71,13 +63,13 @@
 
                         </td>
                     </ng-template>
-                    <td *ngIf="expandBtn" class="text-center">
+                    <td *ngIf="expandBtn && page !== 'row_lead'" class="text-center">
                         <em class="btn-expand" [ngClass]="(showExpanded == i)?'fas fa-angle-up':'fas fa-angle-down'"
                             (click)="(showExpanded == i)?showExpanded = -1:showExpanded = i"></em>
                     </td>
-                    <td *ngIf="page =='device_delivery_status'" class="text-center">
-                        <button class="btn detail_btn text-white">
-                            <i class="fas fa-location-arrow"></i> Track
+                    <td *ngIf="page =='row_lead'" class="text-center">
+                        <button class="btn detail_btn text-white" (click)="opencomfirmationpopupModal('Approve',tr)">
+                            <i class="fas fa-location-arrow"></i> Update
                           </button>                          
                     </td>
                     <td *ngIf="page =='view_user'" class="text-center d-flex" style="gap: 1rem;">

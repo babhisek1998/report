@@ -236,7 +236,7 @@ const navitems: NavItem[] = [
 })
 
 export class AdminMainContainerComponent implements OnInit {
-  topnavImg = '../assets/images/loginpage/topicon.png';
+  topnavImg = '../../../assets/images/loginpage/Ennomart-png-logo.png';
   _mobileQueryListener: () => void;
   _mobileQueryListener1: () => void;
   mobileQueryTablet: any;

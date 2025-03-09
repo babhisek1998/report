@@ -1,42 +1,56 @@
 <ng-container *ngIf="page == 'users'">
+    <!-- <mat-toolbar class="toolbar">
+      <span>View</span>
+      <span class="spacer"></span>
+    </mat-toolbar> -->
     <form [formGroup]="searchForm">
-        <div class="card p-3">
-            <div class="row">
-              <div class="col-md-12">
-              <mat-tab-group (selectedTabChange)="onTabChange($event)">
-              <mat-tab label="SEARCH SINGLE PRODUCTID">
-                 <div class="form mt-3">
-                  <mat-form-field appearance="outline">
-                  <mat-label>Search By Product Id</mat-label>
-                  <input matInput placeholder="Enter Product Id" formControlName="username">
-                  <mat-error *ngIf="searchForm.controls['username'].invalid">{{getErrorMessage()}}</mat-error>
-                  </mat-form-field>
-                   <!-- Submit Button -->
-                   <div class="form-group">
-                     <button type="button" class="btn" (click)="searchsingleuser()" [ngClass]="!searchForm.valid ? 'disbtnp' : 'submit_btn'" [disabled]="!searchForm.valid">Search</button>
-                        <button type="button" class="btn submit_rest" (click)="reset()">Reset</button>
-                    </div>
-                  </div>
-                 </mat-tab>
-                 <mat-tab label="SEARCH ALL PRODUCTID">
-                 </mat-tab>
-              </mat-tab-group>
+      <mat-card class="search-card">
+        <mat-tab-group (selectedTabChange)="onTabChange($event)">
+          <!-- SEARCH SINGLE USER -->
+          <mat-tab label="SEARCH SINGLE PRODUCTID">
+            <div class="search-section">
+              <mat-form-field appearance="outline">
+                <mat-label>Search by Product Id</mat-label>
+                <input matInput placeholder="Enter Product Id" formControlName="username">
+                <mat-error *ngIf="searchForm.controls['username'].invalid">{{ getErrorMessage() }}</mat-error>
+              </mat-form-field>
+  
+              <div class="button-group mt-2">
+                <button mat-raised-button class="login-button" (click)="searchsingleuser()" [disabled]="!searchForm.valid">
+                  Search
+                </button>
+                <button mat-raised-button color="warn" (click)="reset()">
+                  Reset
+                </button>
               </div>
             </div>
-        </div>
+          </mat-tab>
+  
+          <!-- SEARCH ALL USERS -->
+          <mat-tab label="SEARCH ALL PRODUCTID"></mat-tab>
+        </mat-tab-group>
+      </mat-card>
     </form>
   </ng-container>
- 
+  
+  <!-- Data Table Section -->
   <ng-container *ngIf="page == 'users'">
-      <!-- Data Table -->
-      <div *ngIf="res_data && res_data.length > 0">
-        <app-dtable [reports]="res_data" [index_value]="index_value" [index]="index" [page]="'users'" [visibleCols]="3" (u_detail)="page=$event"
-            [columns]="columns">
-        </app-dtable>
-      </div>
-      <!-- No Data Found -->
-      <div *ngIf="noDataFound" class="no-data-container text-center mt-5">
-        <img src="../../../assets/reports/empty-box.png" alt="No Data Found" class="no-data-image mb-3">
-        <p>No Data Found</p>
-      </div>
+    <div *ngIf="res_data && res_data.length > 0">
+      <app-dtable 
+        [reports]="res_data" 
+        [index_value]="index_value" 
+        [index]="index" 
+        [page]="'users'" 
+        [visibleCols]="3" 
+        (u_detail)="page=$event" 
+        [columns]="columns">
+      </app-dtable>
+    </div>
+  
+    <!-- No Data Found -->
+    <div *ngIf="noDataFound" class="no-data-container">
+      <img src="../../../assets/reports/empty-box.png" alt="No Data Found" class="no-data-image">
+      <p>No Data Found</p>
+    </div>
   </ng-container>
+  
